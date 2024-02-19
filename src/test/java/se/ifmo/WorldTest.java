@@ -6,8 +6,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import se.ifmo.task3.Cruiser;
+import se.ifmo.task3.Leader;
 import se.ifmo.task3.Shorts;
 import se.ifmo.task3.enums.Color;
+import se.ifmo.task3.enums.Pose;
 import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
 import se.ifmo.task3.exceptions.CutShortsException;
@@ -147,5 +149,24 @@ public class WorldTest {
     }
 
 
+    @Nested
+    class LeaderTest {
 
+        Leader leader;
+
+        @BeforeEach
+        void init() {
+            leader = new Leader("Leader of г'гувнуттов", 45, Pose.STAND);
+        }
+
+        @Test
+        @DisplayName("Check changing pose")
+        public void checkPose() {
+            assertEquals(Pose.STAND, leader.getPose());
+            leader.changePose();
+            assertEquals(Pose.SIT, leader.getPose());
+
+        }
+
+    }
 }
