@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import se.ifmo.task3.Cruiser;
 import se.ifmo.task3.Shorts;
 import se.ifmo.task3.enums.Color;
 import se.ifmo.task3.enums.Size;
@@ -62,4 +63,89 @@ public class WorldTest {
             }
         }
     }
+
+    @Nested
+    class CruiserTest {
+        Cruiser cruiser;
+        Cruiser enemy;
+
+        @BeforeEach
+        void init() {
+            cruiser = new Cruiser("main", 100, 100, 100, 35);
+            enemy = new Cruiser("enemy", 100, 100, 100, 10);
+        }
+
+        @Test
+        @DisplayName("Check a really long flight")
+        void checkTooBigValueToFly() {
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.fly(101));
+            assertEquals("There is not enough fuel for the flight!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check negative value of flight")
+        void checkNegativeValueOfFlight() {
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.fly(-1));
+            assertEquals("Can't fly negative distance!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check zero value of flight")
+        void checkZeroValueOfFlight() {
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.fly(0));
+            assertEquals("Can't fly negative distance!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check normal values of flight")
+        void checkNormalFlight() {
+            assertAll(
+                    () -> {
+                        cruiser.fly(7);
+                        assertEquals(93, cruiser.getFuel());
+                    },
+                    () -> {
+                        cruiser.fly(23);
+                        assertEquals(70, cruiser.getFuel());
+                    },
+                    () -> {
+                        cruiser.fly(70);
+                        assertEquals(0, cruiser.getFuel());
+                    }
+            );
+
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.fly(0));
+            assertEquals("Can't fly negative distance!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check attack without health")
+        public void checkNoHealth() {
+            cruiser.setHealth(0);
+            assertThrows(Exception.class, () -> cruiser.attack(enemy));
+        }
+
+        @Test
+        @DisplayName("Check illegal damage value")
+        public void checkWrongDamage() {
+            cruiser.setDamage(-100);
+            assertThrows(Exception.class, () -> cruiser.attack(enemy));
+
+            cruiser.setDamage(101);
+            assertThrows(Exception.class, () -> cruiser.attack(enemy));
+        }
+
+        @Test
+        @DisplayName("Check attack")
+        public void checkNormalAttack() {
+            cruiser.attack(enemy);
+            assertEquals(65, enemy.getHealth());
+
+            enemy.attack(cruiser);
+            assertEquals(90, cruiser.getHealth());
+        }
+    }
+
+
+
 }

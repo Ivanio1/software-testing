@@ -9,7 +9,7 @@ public class Silence {
     private Integer volume;
     private boolean gotHigh; // Висит в воздухе над столом переговоров
 
-    public void getHigh(){
+    public void getHigh() {
         gotHigh = true;
     }
 

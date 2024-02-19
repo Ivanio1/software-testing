@@ -24,10 +24,10 @@ public class Cruiser {
 
     //Атаковать другой крейсер
     @SneakyThrows
-    public void attack( Cruiser enemyCruiser) {
+    public void attack(Cruiser enemyCruiser) {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
         if (this.damage <= 0 || this.damage > 100) throw new Exception("Illegal damage value");
-        enemyCruiser.health-=this.damage;
+        enemyCruiser.health -= this.damage;
 
     }
 
@@ -35,7 +35,7 @@ public class Cruiser {
     @SneakyThrows
     public void eruptIntoElectricalDeath(Set<Cruiser> enemies) {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
-        for (Cruiser enemyCruiser: enemies){
+        for (Cruiser enemyCruiser : enemies) {
             enemyCruiser.setHealth(0);
         }
         this.health = 0;
@@ -44,8 +44,8 @@ public class Cruiser {
     // Совершить полет
     @SneakyThrows
     public void fly(int value) {
-        if (value <= 0) throw new Exception("Нельзя пролететь отрицательное расстояние!");
-        if (this.fuel - value < 0) throw new Exception("Топлива не хватит на осуществление полета!");
+        if (value <= 0) throw new Exception("Can't fly negative distance!");
+        if (this.fuel - value < 0) throw new Exception("There is not enough fuel for the flight!");
         this.increaseSpeed();
         this.fuel -= value;
         this.decreaseSpeed();

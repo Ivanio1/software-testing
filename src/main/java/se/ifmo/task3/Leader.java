@@ -22,7 +22,7 @@ public class Leader extends Human {
     }
 
     @SneakyThrows
-    public void saySorryToCommander(Commander commander){
+    public void saySorryToCommander(Commander commander) {
         if (!commander.isLookingOnLeader()) throw new Exception("Commander is not ready!");
         commander.setLookingOnLeader(false);
         commander.getSilence().setGotHigh(false);

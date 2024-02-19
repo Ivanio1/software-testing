@@ -14,7 +14,7 @@ import java.util.Set;
 public class Commander extends Human {
     private Shorts shorts;
     private Set<Cruiser> cruisers;
-    Silence silence = new Silence(100,false);
+    Silence silence = new Silence(100, false);
 
     private boolean isLookingOnLeader;
 
@@ -34,7 +34,7 @@ public class Commander extends Human {
     //
     @SneakyThrows
     public void lookAtLeader() {
-        this.isLookingOnLeader  = true;
+        this.isLookingOnLeader = true;
         silence.getHigh();
 
     }
