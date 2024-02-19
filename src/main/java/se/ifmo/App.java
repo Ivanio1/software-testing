@@ -1,9 +1,6 @@
-package ru.ivanio1;
+package se.ifmo;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
