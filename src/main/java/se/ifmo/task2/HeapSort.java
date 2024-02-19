@@ -2,11 +2,10 @@ package se.ifmo.task2;
 
 public class HeapSort {
 
-
     public static int[] sort(int[] arr) {
         int n = arr.length;
 
-        // Build heap (rearrange array)
+        // Build heap
         for (int i = n / 2 - 1; i >= 0; i--)
             heapify(arr, n, i);
 
@@ -24,12 +23,11 @@ public class HeapSort {
         return arr;
     }
 
-    // To heapify a subtree rooted with node i which is
-    // an index in arr[]. n is size of heap
+
     private static void heapify(int[] arr, int n, int i) {
         int largest = i; // Initialize largest as root
-        int l = 2 * i + 1; // left = 2*i + 1
-        int r = 2 * i + 2; // right = 2*i + 2
+        int l = 2 * i + 1; // left child
+        int r = 2 * i + 2; // right child
 
         // If left child is larger than root
         if (l < n && arr[l] > arr[largest])
