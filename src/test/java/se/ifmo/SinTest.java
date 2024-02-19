@@ -18,5 +18,12 @@ public class SinTest {
         );
     }
 
-
+    @ParameterizedTest(name = "sin({0}) = {1}")
+    @DisplayName("Check between dots [-1; +1]")
+    @CsvFileSource(resources = "/table_values.csv", numLinesToSkip = 1, delimiter = ';')
+    void checkBetweenDotsMinusPiAndPi(double x, double y) {
+        assertAll(
+                () -> assertEquals(y, Sin.calc(x, 100), 0.0001)
+        );
+    }
 }
