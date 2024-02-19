@@ -1,7 +1,7 @@
 TODO:
 - [X] HeapSort Algo
 - [X] HeapSort tests
-- [ ] Object Model
+- [X] Object Model
 - [ ] Tests for object model
 - [ ] Отчет
 - [ ] Запуск на хелиосе
