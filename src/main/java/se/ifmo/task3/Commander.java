@@ -6,5 +6,10 @@ public class Commander extends Human{
         super(name, age);
     }
 
+    public void putOnShorts(){
+
+    }
+
+
 
 }

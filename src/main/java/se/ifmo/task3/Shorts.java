@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import se.ifmo.task3.enums.Color;
 import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
+import se.ifmo.task3.exceptions.CutShortsException;
 
 @Getter
 @Setter
@@ -27,5 +28,21 @@ public class Shorts extends Clothes {
 
     public boolean isBrilliantsFlag() {
         return brilliantsFlag;
+    }
+
+    //Укоротить шорты
+    @SneakyThrows
+    public void cutShorts() {
+        if (getSize().ordinal() - 1 < 0)
+            throw new CutShortsException("Unable to cut shorts, it is already the smallest size!");
+        setSize(Size.values()[getSize().ordinal() - 1]);
+    }
+
+    //Удлинить шорты
+    @SneakyThrows
+    public void lengthenShorts() {
+        if (getSize().ordinal() + 1 >= Size.values().length)
+            throw new CutShortsException("Unable to lengthen shorts, it is already the biggest size!");
+        setSize(Size.values()[getSize().ordinal() + 1]);
     }
 }
