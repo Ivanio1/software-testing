@@ -4,4 +4,5 @@ TODO:
 - [ ] Object Model
 - [ ] Tests for object model
 - [ ] Отчет
+- [ ] Запуск на хелиосе
 ![img.png](img.png)
