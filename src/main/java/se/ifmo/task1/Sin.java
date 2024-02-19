@@ -4,6 +4,9 @@ public class Sin {
 
     public static double calc(double x, int n) {
 
+        if (Double.isInfinite(x) || Double.isNaN(x))
+            throw new IllegalArgumentException("Argument can't be infinite or null!");
+
         double PI2 = Math.PI * 2;
 
         if (x >= 0) {
