@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SinTest {
     @ParameterizedTest(name = "sin({0})")
     @DisplayName("Check PI dots")
-    @ValueSource(doubles = {-2 * Math.PI, -Math.PI, -0.5 * Math.PI, 0, 0.5 * Math.PI, Math.PI, 1.5 * Math.PI, 2 * Math.PI})
+    @ValueSource(doubles = {-2 * Math.PI, -1.5 * Math.PI, -Math.PI, -0.5 * Math.PI, 0, 0.5 * Math.PI, Math.PI, 1.5 * Math.PI, 2 * Math.PI})
     void checkPiDots(double param) {
         assertAll(
                 () -> assertEquals(Math.sin(param), Sin.calc(param, 100), 0.0001)
