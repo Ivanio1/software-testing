@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import se.ifmo.task3.Commander;
 import se.ifmo.task3.Cruiser;
 import se.ifmo.task3.Leader;
 import se.ifmo.task3.Shorts;
@@ -153,10 +154,12 @@ public class WorldTest {
     class LeaderTest {
 
         Leader leader;
+        Commander commander;
 
         @BeforeEach
         void init() {
             leader = new Leader("Leader of г'гувнуттов", 45, Pose.STAND);
+            commander = new Commander("Commander of вл'хургов", 60);
         }
 
         @Test
@@ -166,6 +169,23 @@ public class WorldTest {
             leader.changePose();
             assertEquals(Pose.SIT, leader.getPose());
 
+        }
+
+        @Test
+        @DisplayName("Check commander not ready")
+        public void checkCommander() {
+            assertThrows(Exception.class, () -> leader.saySorryToCommander(commander));
+        }
+
+        @Test
+        @DisplayName("Check commander is ready")
+        public void checkCommanderIsReady() {
+            commander.lookAtLeader();
+            leader.saySorryToCommander(commander);
+            assertAll(
+                    () -> assertFalse(commander.isLookingOnLeader()),
+                    () -> assertFalse(commander.getSilence().isGotHigh())
+            );
         }
 
     }

@@ -31,7 +31,6 @@ public class Commander extends Human {
         shorts = null;
     }
 
-    //
     @SneakyThrows
     public void lookAtLeader() {
         this.isLookingOnLeader = true;
