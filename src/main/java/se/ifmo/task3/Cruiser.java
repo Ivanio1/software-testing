@@ -35,6 +35,7 @@ public class Cruiser {
     @SneakyThrows
     public void eruptIntoElectricalDeath(Set<Cruiser> enemies) {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
+        if (enemies.isEmpty()) throw new Exception("No cruisers to attack!");
         for (Cruiser enemyCruiser : enemies) {
             enemyCruiser.setHealth(0);
         }

@@ -14,6 +14,10 @@ import se.ifmo.task3.enums.Pose;
 import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
 import se.ifmo.task3.exceptions.CutShortsException;
+import se.ifmo.task3.exceptions.StartingBattleException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class WorldTest {
 
@@ -147,6 +151,38 @@ public class WorldTest {
             enemy.attack(cruiser);
             assertEquals(90, cruiser.getHealth());
         }
+
+        @Test
+        @DisplayName("Check eruptIntoElectricalDeath without health")
+        public void checkEruptNoHealth() {
+            cruiser.setHealth(0);
+            Set<Cruiser> enemies = new HashSet<>();
+            enemies.add(new Cruiser("1", 100, 90, 90, 55));
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.eruptIntoElectricalDeath(enemies));
+            assertEquals("Cruiser is dead!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check eruptIntoElectricalDeath without enemies")
+        public void checkEruptNoEnemies() {
+            Throwable exception = assertThrows(Exception.class, () -> cruiser.eruptIntoElectricalDeath(new HashSet<>()));
+            assertEquals("No cruisers to attack!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check eruptIntoElectricalDeath")
+        public void checkEruptIntoElectricalDeath() {
+            Set<Cruiser> enemies = new HashSet<>();
+            enemies.add(new Cruiser("1", 100, 90, 90, 55));
+            enemies.add(new Cruiser("2", 100, 95, 60, 50));
+            enemies.add(new Cruiser("3", 100, 100, 100, 45));
+            cruiser.eruptIntoElectricalDeath(enemies);
+            for (Cruiser enemyCruiser : enemies) {
+                assertEquals(0, enemyCruiser.getHealth());
+            }
+            assertEquals(0, cruiser.getHealth());
+        }
+
     }
 
 
@@ -188,5 +224,91 @@ public class WorldTest {
             );
         }
 
+    }
+
+    @Nested
+    class CommanderTest {
+
+        Commander commander;
+        Set<Cruiser> enemies;
+
+        @BeforeEach
+        void init() {
+            commander = new Commander("Commander of вл'хургов", 60);
+            enemies = new HashSet<>();
+        }
+
+        @Test
+        @DisplayName("Check putting on shorts")
+        public void checkPuttingShorts() {
+            commander.putOnShorts();
+            Shorts shorts = new Shorts(Color.BLACK, Size.XL);
+            assertEquals(shorts, commander.getShorts());
+        }
+
+        @Test
+        @DisplayName("Check taking off shorts")
+        public void checkTakingOffShorts() {
+            commander.takeOffShorts();
+            assertNull(commander.getShorts());
+        }
+
+        @Test
+        @DisplayName("Check looking at leader")
+        public void checkLooking() {
+            commander.lookAtLeader();
+            assertAll(
+                    () -> assertTrue(commander.isLookingOnLeader()),
+                    () -> assertTrue(commander.getSilence().isGotHigh())
+            );
+        }
+
+        @Test
+        @DisplayName("Check starting battle without looking on leader")
+        public void checkStartingWithoutLooking() {
+            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
+            assertEquals("Commander is not looking on leader!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check starting battle without cruisers")
+        public void checkStartingWithoutCruisers() {
+            commander.lookAtLeader();
+            enemies.add(new Cruiser("1", 100, 90, 90, 55));
+            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
+            assertEquals("No cruisers for attack!", exception.getMessage());
+        }
+
+        @Test
+        @DisplayName("Check starting battle without enemies")
+        public void checkStartingWithoutEnemies() {
+            commander.lookAtLeader();
+            commander.getCruisers().add(new Cruiser("1", 100, 90, 90, 55));
+            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
+            assertEquals("No cruisers to attack!", exception.getMessage());
+        }
+
+
+        @Test
+        @DisplayName("Check starting battle")
+        public void checkEStartingBattle() {
+            commander.lookAtLeader();
+            Set<Cruiser> enemies = new HashSet<>();
+            enemies.add(new Cruiser("1", 100, 90, 90, 55));
+            enemies.add(new Cruiser("2", 100, 95, 60, 50));
+            enemies.add(new Cruiser("3", 100, 100, 100, 45));
+
+            commander.getCruisers().add(new Cruiser("1", 100, 90, 90, 55));
+            commander.getCruisers().add(new Cruiser("2", 100, 95, 60, 50));
+            commander.getCruisers().add(new Cruiser("3", 100, 100, 100, 45));
+            commander.startBattle(enemies);
+
+            for (Cruiser enemyCruiser : enemies) {
+                assertEquals(0, enemyCruiser.getHealth());
+            }
+
+            assertTrue(commander.getCruisers().isEmpty());
+
+        }
     }
 }
