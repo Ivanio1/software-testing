@@ -30,6 +30,15 @@ public class SinTest {
         );
     }
 
+    @ParameterizedTest(name = "sin({0}) = {1}")
+    @DisplayName("Check csv elements")
+    @CsvFileSource(resources = "/table_values_high_accuracy.csv", numLinesToSkip = 1, delimiter = ';')
+    void checkBetweenDotsFromCsvHighAccuracy(double x, double y) {
+        assertAll(
+                () -> assertEquals(y, Sin.calc(x, 50), 0.0000001)
+        );
+    }
+
     @Test
     @DisplayName("Check illegal inputs")
     void checkWrongInputs() {
