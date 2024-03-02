@@ -24,7 +24,7 @@ public abstract class Human {
             pose = Pose.STAND;
         } else {
             pose = Pose.SIT;
-        };
+        }
     }
 
     public void speak() {
@@ -38,5 +38,4 @@ public abstract class Human {
     public abstract void listenToApologies(Human human);
 
     public abstract void listenAboutMommy(Human human);
-
 }

@@ -1,15 +1,18 @@
 package se.ifmo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import se.ifmo.task3.Commander;
 import se.ifmo.task3.Cruiser;
-import se.ifmo.task3.Leader;
+import se.ifmo.task3.Place;
 import se.ifmo.task3.Shorts;
+import se.ifmo.task3.enums.ClothesAttribute;
 import se.ifmo.task3.enums.Color;
+import se.ifmo.task3.enums.Mood;
 import se.ifmo.task3.enums.Pose;
 import se.ifmo.task3.enums.Race;
 import se.ifmo.task3.enums.Size;
@@ -18,7 +21,15 @@ import se.ifmo.task3.exceptions.CutShortsException;
 import se.ifmo.task3.exceptions.StartingBattleException;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WorldTest {
 
@@ -28,14 +39,14 @@ public class WorldTest {
 
         @BeforeEach
         void init() {
-            shorts = new Shorts(Color.BLACK, Size.XL);
+            shorts = new Shorts(Color.BLACK, Size.XL, new HashSet<>());
         }
 
         @Test
-        @DisplayName("Check ability to addBrilliants")
+        @DisplayName("Check attribute")
         public void checkAddBrilliants() {
             shorts.addBrilliants();
-            assertTrue(shorts.isBrilliantsFlag());
+            assertTrue(shorts.getClothesAttributes().contains(ClothesAttribute.BRILLIANT));
         }
 
         @Test
@@ -184,132 +195,204 @@ public class WorldTest {
             assertEquals(0, cruiser.getHealth());
         }
 
-    }
-
-
-    @Nested
-    class LeaderTest {
-
-        Leader leader;
-        Commander commander;
-
-        @BeforeEach
-        void init() {
-            leader = new Leader("Leader of г'гувнуттов", 45, Pose.STAND, Race.GUVNUTT);
-            commander = new Commander("Commander of вл'хургов", 60);
-        }
-
-        @Test
-        @DisplayName("Check changing pose")
-        public void checkPose() {
-            assertEquals(Pose.STAND, leader.getPose());
-            leader.changePose();
-            assertEquals(Pose.SIT, leader.getPose());
-
-        }
-
-        @Test
-        @DisplayName("Check commander not ready")
-        public void checkCommander() {
-            assertThrows(Exception.class, () -> leader.saySorryToCommander(commander));
-        }
-
-        @Test
-        @DisplayName("Check commander is ready")
-        public void checkCommanderIsReady() {
-            commander.lookAtLeader();
-            leader.saySorryToCommander(commander);
-            assertAll(
-                    () -> assertFalse(commander.isLookingOnLeader()),
-                    () -> assertFalse(commander.getSilence().isGotHigh())
-            );
-        }
 
     }
 
     @Nested
     class CommanderTest {
 
-        Commander commander;
+        Commander commander1;
+        Commander commander2;
         Set<Cruiser> enemies;
 
         @BeforeEach
         void init() {
-            commander = new Commander("Commander of вл'хургов", 60);
+            commander1 = new Commander(
+                    "Commander of вл'хургов",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.ANGRY,
+                    new HashSet<>()
+            );
+            commander2 = new Commander(
+                    "Commander of other",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.ANGRY,
+                    new HashSet<>()
+            );
             enemies = new HashSet<>();
+            commander2.setCruisers(enemies);
         }
 
         @Test
         @DisplayName("Check putting on shorts")
         public void checkPuttingShorts() {
-            commander.putOnShorts();
-            Shorts shorts = new Shorts(Color.BLACK, Size.XL);
-            assertEquals(shorts, commander.getShorts());
+            commander1.putOnShorts();
+            Set<ClothesAttribute> attributes = new HashSet<>();
+            attributes.add(ClothesAttribute.BRILLIANT);
+            Shorts shorts = new Shorts(Color.GREEN, Size.XL, attributes);
+            assertEquals(
+                    Optional.of(shorts),
+                    commander1.getClothes().stream().filter(i -> i instanceof Shorts).findFirst()
+            );
         }
 
         @Test
         @DisplayName("Check taking off shorts")
         public void checkTakingOffShorts() {
-            commander.takeOffShorts();
-            assertNull(commander.getShorts());
+            commander1.takeOffShorts();
+            assert (commander1.getClothes().stream().noneMatch(i -> i instanceof Shorts));
         }
-
-        @Test
-        @DisplayName("Check looking at leader")
-        public void checkLooking() {
-            commander.lookAtLeader();
-            assertAll(
-                    () -> assertTrue(commander.isLookingOnLeader()),
-                    () -> assertTrue(commander.getSilence().isGotHigh())
-            );
-        }
-
-        @Test
-        @DisplayName("Check starting battle without looking on leader")
-        public void checkStartingWithoutLooking() {
-            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
-            assertEquals("Commander is not looking on leader!", exception.getMessage());
-        }
-
         @Test
         @DisplayName("Check starting battle without cruisers")
         public void checkStartingWithoutCruisers() {
-            commander.lookAtLeader();
             enemies.add(new Cruiser("1", 100, 90, 90, 55));
-            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
+            Throwable exception = assertThrows(StartingBattleException.class, () -> commander1.startBattle(commander2));
             assertEquals("No cruisers for attack!", exception.getMessage());
         }
 
         @Test
         @DisplayName("Check starting battle without enemies")
         public void checkStartingWithoutEnemies() {
-            commander.lookAtLeader();
-            commander.getCruisers().add(new Cruiser("1", 100, 90, 90, 55));
-            Throwable exception = assertThrows(StartingBattleException.class, () -> commander.startBattle(enemies));
+            commander1.getCruisers().add(new Cruiser("1", 100, 90, 90, 55));
+            Throwable exception = assertThrows(StartingBattleException.class, () -> commander1.startBattle(commander2));
             assertEquals("No cruisers to attack!", exception.getMessage());
         }
 
-
         @Test
-        @DisplayName("Check starting battle")
-        public void checkEStartingBattle() {
-            commander.lookAtLeader();
+        @DisplayName("Check fight")
+        public void checkFight() {
             Set<Cruiser> enemies = new HashSet<>();
             enemies.add(new Cruiser("1", 100, 90, 90, 55));
             enemies.add(new Cruiser("2", 100, 95, 60, 50));
             enemies.add(new Cruiser("3", 100, 100, 100, 45));
+            Commander commander1 = new Commander(
+                    "c1", 1, Pose.STAND, Race.GUVNUTT, null, Mood.ANGRY, null
+            );
+            commander1.setCruisers(enemies);
+            Set<Cruiser> alies = new HashSet<>();
+            alies.add(new Cruiser("1", 100, 90, 90, 65));
+            alies.add(new Cruiser("2", 100, 95, 60, 60));
+            alies.add(new Cruiser("3", 100, 100, 100, 65));
+            Commander commander2 = new Commander(
+                    "c1", 1, Pose.STAND, Race.GUVNUTT, null, Mood.ANGRY, null
+            );
+            commander2.setCruisers(alies);
 
-            commander.getCruisers().add(new Cruiser("1", 100, 90, 90, 55));
-            commander.getCruisers().add(new Cruiser("2", 100, 95, 60, 50));
-            commander.getCruisers().add(new Cruiser("3", 100, 100, 100, 45));
-            commander.startBattle(enemies);
+            assertEquals(commander2.startBattle(commander2), commander1);
+        }
+    }
 
-            for (Cruiser enemyCruiser : enemies) {
-                assertEquals(0, enemyCruiser.getHealth());
-            }
+    @Nested
+    class MoodTest {
+        Commander commander1;
+        Commander commander2;
 
-            assertTrue(commander.getCruisers().isEmpty());
+        @BeforeEach
+        void init() {
+            commander1 = new Commander(
+                    "Commander of вл'хургов",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.HAPPY,
+                    new HashSet<>()
+            );
+            commander2 = new Commander(
+                    "Commander of вл'хургов",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.HAPPY,
+                    new HashSet<>()
+            );
+        }
 
+        @Test
+        @DisplayName("Check listening words about mommy")
+        void checkListenToWordsAboutMommy() {
+            commander1.listenAboutMommy(commander2);
+            assertEquals(commander1.getMood(), Mood.ANGRY);
+            assertEquals(commander1.getAngryFor(), List.of(commander2));
+        }
+
+        @Test
+        @DisplayName("Check listening apologies")
+        void checkListenToApologies() {
+            commander1.listenAboutMommy(commander2);
+            assertEquals(commander1.getMood(), Mood.ANGRY);
+            assertEquals(commander1.getAngryFor(), List.of(commander2));
+
+            commander1.listenToApologies(commander2);
+            assertEquals(commander1.getMood(), Mood.HAPPY);
+            assertEquals(commander1.getAngryFor(), List.of());
+        }
+    }
+
+    @Nested
+    class PlaceTest {
+        Commander commander1;
+        Commander commander2;
+        Commander commander3;
+
+        @BeforeEach
+        void init() {
+            commander1 = new Commander(
+                    "Commander of вл'хургов",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.HAPPY,
+                    new HashSet<>()
+            );
+            commander2 = new Commander(
+                    "Commander of f1",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.HAPPY,
+                    new HashSet<>()
+            );
+            commander3 = new Commander(
+                    "Commander of f2",
+                    60, Pose.SIT, Race.VLHURR,
+                    null,
+                    Mood.HAPPY,
+                    new HashSet<>()
+            );
+        }
+
+        @Test
+        @DisplayName("Check silence place mood")
+        void checkHappyMood() {
+            Place bar = new Place();
+            bar.enterPlace(commander1);
+            bar.enterPlace(commander2);
+            bar.enterPlace(commander3);
+
+            assertEquals(bar.getSilenceStatus().getMood(), Mood.HAPPY);
+        }
+
+        @Test
+        @DisplayName("Check silence place mood")
+        void checkScarySilence() {
+            Place bar = new Place();
+            bar.enterPlace(commander1);
+            bar.enterPlace(commander2);
+            bar.enterPlace(commander3);
+            commander1.setMood(Mood.ANGRY);
+
+            assertEquals(bar.getSilenceStatus().getMood(), Mood.SCARY);
+        }
+
+
+        @Test
+        @DisplayName("Check no silence place mood")
+        void checkNoSilence() {
+            Place bar = new Place();
+            bar.enterPlace(commander1);
+            bar.enterPlace(commander2);
+            bar.enterPlace(commander3);
+            commander1.speak();
+
+            assertNull(bar.getSilenceStatus());
         }
     }
 }

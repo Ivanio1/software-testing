@@ -3,7 +3,6 @@ package se.ifmo.task3;
 import lombok.Data;
 import lombok.SneakyThrows;
 
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,13 +24,10 @@ public class Cruiser {
 
     //Атаковать другой крейсер
     @SneakyThrows
-    public void attack(Cruiser enemyCruiser, List<Cruiser> enemies) {
+    public void attack(Cruiser enemyCruiser) {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
         if (this.damage <= 0 || this.damage > 100) throw new Exception("Illegal damage value");
         enemyCruiser.health -= this.damage;
-        if(enemyCruiser.health <= 0) {
-            enemies.remove(enemyCruiser);
-        }
     }
 
     //разразиться электрической смертью

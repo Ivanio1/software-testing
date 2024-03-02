@@ -12,8 +12,8 @@ import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.ClothesAlreadyPutException;
 import se.ifmo.task3.exceptions.StartingBattleException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +21,7 @@ import java.util.Set;
 @Setter
 public class Commander extends Human {
     private Set<Cruiser> cruisers = new HashSet<>();
-    private List<Human> angryFor;
+    private List<Human> angryFor = new ArrayList<>();
 
     public Commander(String name, Integer age, Pose pose, Race race, Place place, Mood mood, Set<Clothes> clothes) {
         super(name, age, pose, race, place, mood, clothes, false);
@@ -48,17 +48,21 @@ public class Commander extends Human {
         if (enemies.isEmpty()) throw new StartingBattleException("No cruisers to attack!");
         var enemiesList = enemies.stream().toList();
         var cruisersList = cruisers.stream().toList();
-        while(!enemies.isEmpty() || !this.cruisers.isEmpty()) {
-            for(int i = 0; i < Math.max(enemies.size(), cruisers.size()); i++) {
-                if(i < cruisersList.size()) {
-                    cruisersList.get(i).attack(enemiesList.get(i % enemiesList.size()), enemiesList);
+        boolean enemiesAlive = enemiesList.stream().anyMatch(i -> i.getHealth() > 0);
+        boolean cruisersAlive = cruisersList.stream().anyMatch(i -> i.getHealth() > 0);
+        while (enemiesAlive || cruisersAlive) {
+            for (int i = 0; i < Math.max(enemies.size(), cruisers.size()); i++) {
+                if (i < cruisersList.size()) {
+                    cruisersList.get(i).attack(enemiesList.get(i % enemiesList.size()));
                 }
-                if(i < enemiesList.size()) {
-                    enemiesList.get(i).attack(cruisersList.get(i % cruisersList.size()), cruisersList);
+                if (i < enemiesList.size()) {
+                    enemiesList.get(i).attack(cruisersList.get(i % cruisersList.size()));
                 }
             }
+            enemiesAlive = enemiesList.stream().anyMatch(i -> i.getHealth() > 0);
+            cruisersAlive = cruisersList.stream().anyMatch(i -> i.getHealth() > 0);
         }
-        if(cruisersList.isEmpty()) {
+        if (cruisersAlive) {
             return commander;
         }
         return this;
@@ -67,10 +71,14 @@ public class Commander extends Human {
     @Override
     public void listenToApologies(Human human) {
         angryFor.remove(human);
+        if (angryFor.isEmpty()) {
+            setMood(Mood.HAPPY);
+        }
     }
 
     @Override
     public void listenAboutMommy(Human human) {
         angryFor.add(human);
+        setMood(Mood.ANGRY);
     }
 }
