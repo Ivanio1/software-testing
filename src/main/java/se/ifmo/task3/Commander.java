@@ -3,47 +3,46 @@ package se.ifmo.task3;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import se.ifmo.task3.enums.ClothesAttribute;
 import se.ifmo.task3.enums.Color;
+import se.ifmo.task3.enums.Mood;
+import se.ifmo.task3.enums.Pose;
+import se.ifmo.task3.enums.Race;
 import se.ifmo.task3.enums.Size;
+import se.ifmo.task3.exceptions.ClothesAlreadyPutException;
 import se.ifmo.task3.exceptions.StartingBattleException;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 public class Commander extends Human {
-    private Shorts shorts;
     private Set<Cruiser> cruisers = new HashSet<>();
-    Silence silence = new Silence(100, false);
+    private List<Human> angryFor;
 
-    private boolean isLookingOnLeader;
-
-    public Commander(String name, Integer age) {
-        super(name, age);
-        isLookingOnLeader = false;
-    }
-
-    public void putOnShorts() {
-        shorts = new Shorts(Color.BLACK, Size.XL);
-    }
-
-    public void takeOffShorts() {
-        shorts = null;
+    public Commander(String name, Integer age, Pose pose, Race race, Place place, Mood mood, Set<Clothes> clothes) {
+        super(name, age, pose, race, place, mood, clothes, false);
     }
 
     @SneakyThrows
-    public void lookAtLeader() {
-        this.isLookingOnLeader = true;
-        silence.getHigh();
-
+    public void putOnShorts() {
+        if (this.getClothes().stream().anyMatch(i -> i instanceof Shorts)) {
+            throw new ClothesAlreadyPutException("double shorts is cringe! try again");
+        }
+        getClothes().add(new Shorts(Color.GREEN, Size.XL, Set.of(ClothesAttribute.BRILLIANT)));
     }
+
+    public void takeOffShorts() {
+        getClothes().stream().filter(i -> i instanceof Shorts).toList().forEach(getClothes()::remove);
+    }
+
 
     //Командир говорит слово и миллион сверкающих чудовищным вооружением звездных крейсеров разражается электрической смертью
     @SneakyThrows
     public void startBattle(Set<Cruiser> enemies) {
-        if (!this.isLookingOnLeader) throw new StartingBattleException("Commander is not looking on leader!");
         if (this.cruisers.isEmpty()) throw new StartingBattleException("No cruisers for attack!");
         if (enemies.isEmpty()) throw new StartingBattleException("No cruisers to attack!");
         Iterator<Cruiser> iterator = this.cruisers.iterator();
@@ -54,5 +53,13 @@ public class Commander extends Human {
         }
     }
 
+    @Override
+    public void listenToApologies(Human human) {
+        angryFor.remove(human);
+    }
 
+    @Override
+    public void listenAboutMommy(Human human) {
+        angryFor.add(human);
+    }
 }

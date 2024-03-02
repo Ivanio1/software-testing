@@ -28,7 +28,6 @@ public class Cruiser {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
         if (this.damage <= 0 || this.damage > 100) throw new Exception("Illegal damage value");
         enemyCruiser.health -= this.damage;
-
     }
 
     //разразиться электрической смертью

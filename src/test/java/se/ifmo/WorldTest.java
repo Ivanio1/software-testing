@@ -11,6 +11,7 @@ import se.ifmo.task3.Leader;
 import se.ifmo.task3.Shorts;
 import se.ifmo.task3.enums.Color;
 import se.ifmo.task3.enums.Pose;
+import se.ifmo.task3.enums.Race;
 import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
 import se.ifmo.task3.exceptions.CutShortsException;
@@ -194,7 +195,7 @@ public class WorldTest {
 
         @BeforeEach
         void init() {
-            leader = new Leader("Leader of г'гувнуттов", 45, Pose.STAND);
+            leader = new Leader("Leader of г'гувнуттов", 45, Pose.STAND, Race.GUVNUTT);
             commander = new Commander("Commander of вл'хургов", 60);
         }
 
