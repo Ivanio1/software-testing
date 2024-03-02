@@ -3,6 +3,7 @@ package se.ifmo.task3;
 import lombok.Data;
 import lombok.SneakyThrows;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -24,10 +25,13 @@ public class Cruiser {
 
     //Атаковать другой крейсер
     @SneakyThrows
-    public void attack(Cruiser enemyCruiser) {
+    public void attack(Cruiser enemyCruiser, List<Cruiser> enemies) {
         if (this.health <= 0) throw new Exception("Cruiser is dead!");
         if (this.damage <= 0 || this.damage > 100) throw new Exception("Illegal damage value");
         enemyCruiser.health -= this.damage;
+        if(enemyCruiser.health <= 0) {
+            enemies.remove(enemyCruiser);
+        }
     }
 
     //разразиться электрической смертью
@@ -43,11 +47,11 @@ public class Cruiser {
 
     // Совершить полет
     @SneakyThrows
-    public void fly(int value) {
-        if (value <= 0) throw new Exception("Can't fly negative distance!");
-        if (this.fuel - value < 0) throw new Exception("There is not enough fuel for the flight!");
+    public void fly(int distance) {
+        if (distance <= 0) throw new Exception("Can't fly negative distance!");
+        if (this.fuel - distance < 0) throw new Exception("There is not enough fuel for the flight!");
         this.increaseSpeed();
-        this.fuel -= value;
+        this.fuel -= distance;
         this.decreaseSpeed();
     }
 

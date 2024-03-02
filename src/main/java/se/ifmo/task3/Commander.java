@@ -42,15 +42,26 @@ public class Commander extends Human {
 
     //Командир говорит слово и миллион сверкающих чудовищным вооружением звездных крейсеров разражается электрической смертью
     @SneakyThrows
-    public void startBattle(Set<Cruiser> enemies) {
+    public Human startBattle(Commander commander) {
+        var enemies = commander.getCruisers();
         if (this.cruisers.isEmpty()) throw new StartingBattleException("No cruisers for attack!");
         if (enemies.isEmpty()) throw new StartingBattleException("No cruisers to attack!");
-        Iterator<Cruiser> iterator = this.cruisers.iterator();
-        while (iterator.hasNext()) {
-            Cruiser cruiser = iterator.next();
-            cruiser.eruptIntoElectricalDeath(enemies);
-            iterator.remove(); // Удалить текущий крейсер из списка
+        var enemiesList = enemies.stream().toList();
+        var cruisersList = cruisers.stream().toList();
+        while(!enemies.isEmpty() || !this.cruisers.isEmpty()) {
+            for(int i = 0; i < Math.max(enemies.size(), cruisers.size()); i++) {
+                if(i < cruisersList.size()) {
+                    cruisersList.get(i).attack(enemiesList.get(i % enemiesList.size()), enemiesList);
+                }
+                if(i < enemiesList.size()) {
+                    enemiesList.get(i).attack(cruisersList.get(i % cruisersList.size()), cruisersList);
+                }
+            }
         }
+        if(cruisersList.isEmpty()) {
+            return commander;
+        }
+        return this;
     }
 
     @Override
