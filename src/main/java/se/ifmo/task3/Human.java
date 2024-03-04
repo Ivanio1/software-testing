@@ -19,13 +19,6 @@ public abstract class Human {
     private Mood mood;
     private Set<Clothes> clothes;
     private boolean isSpeaking = false;
-    public void changePose() {
-        if (this.pose == Pose.SIT) {
-            pose = Pose.STAND;
-        } else {
-            pose = Pose.SIT;
-        }
-    }
 
     public void speak() {
         isSpeaking = true;

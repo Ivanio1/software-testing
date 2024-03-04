@@ -17,6 +17,7 @@ import se.ifmo.task3.enums.Pose;
 import se.ifmo.task3.enums.Race;
 import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
+import se.ifmo.task3.exceptions.ClothesAlreadyPutException;
 import se.ifmo.task3.exceptions.CutShortsException;
 import se.ifmo.task3.exceptions.StartingBattleException;
 
@@ -25,11 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WorldTest {
 
@@ -226,6 +223,14 @@ public class WorldTest {
         }
 
         @Test
+        @DisplayName("Check putting on shorts on shorts")
+        public void checkPuttingShortsOn(){
+            commander1.putOnShorts();
+            Throwable exception = assertThrows(ClothesAlreadyPutException.class, () -> commander1.putOnShorts());
+            assertEquals("double shorts is cringe! try again", exception.getMessage());
+        }
+
+        @Test
         @DisplayName("Check putting on shorts")
         public void checkPuttingShorts() {
             commander1.putOnShorts();
@@ -393,6 +398,13 @@ public class WorldTest {
             commander1.speak();
 
             assertNull(bar.getSilenceStatus());
+        }
+
+        @Test
+        @DisplayName("Check turn silent")
+        void checkSilent() {
+           commander1.silent();
+            assertFalse(commander1.isSpeaking());
         }
     }
 }
