@@ -50,19 +50,29 @@ public class Commander extends Human {
         var cruisersList = cruisers.stream().toList();
         boolean enemiesAlive = enemiesList.stream().anyMatch(i -> i.getHealth() > 0);
         boolean cruisersAlive = cruisersList.stream().anyMatch(i -> i.getHealth() > 0);
-        while (enemiesAlive || cruisersAlive) {
-            for (int i = 0; i < Math.max(enemies.size(), cruisers.size()); i++) {
-                if (i < cruisersList.size()) {
-                    cruisersList.get(i).attack(enemiesList.get(i % enemiesList.size()));
-                }
-                if (i < enemiesList.size()) {
-                    enemiesList.get(i).attack(cruisersList.get(i % cruisersList.size()));
-                }
+        int i = 0;
+        int j = 0;
+        while (enemiesAlive && cruisersAlive) {
+            while(cruisersList.get(i).getHealth() <= 0) {
+                i++;
+                i = i >= cruisersList.size() ? 0 : i;
             }
-            enemiesAlive = enemiesList.stream().anyMatch(i -> i.getHealth() > 0);
-            cruisersAlive = cruisersList.stream().anyMatch(i -> i.getHealth() > 0);
+            while(enemiesList.get(j).getHealth() <= 0) {
+                j++;
+                j = j >= enemiesList.size() ? 0 : j;
+            };
+            cruisersList.get(i).attack(enemiesList.get(j));
+            if(enemiesList.get(j).getHealth() > 0) {
+                enemiesList.get(j).attack(cruisersList.get(i));
+            }
+            i++;
+            j++;
+            i = i >= cruisersList.size() ? 0 : i;
+            j = j >= enemiesList.size() ? 0 : j;
+            enemiesAlive = enemiesList.stream().anyMatch(cr -> cr.getHealth() > 0);
+            cruisersAlive = cruisersList.stream().anyMatch(cr -> cr.getHealth() > 0);
         }
-        if (cruisersList.stream().anyMatch(i -> i.getHealth() > 0)) {
+        if (cruisersList.stream().anyMatch(cr -> cr.getHealth() > 0)) {
             return commander;
         }
         return this;

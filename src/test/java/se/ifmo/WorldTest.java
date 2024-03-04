@@ -221,7 +221,7 @@ public class WorldTest {
 
         @Test
         @DisplayName("Check putting on shorts on shorts")
-        public void checkPuttingShortsOn(){
+        public void checkPuttingShortsOn() {
             commander1.putOnShorts();
             Throwable exception = assertThrows(ClothesAlreadyPutException.class, () -> commander1.putOnShorts());
             assertEquals("double shorts is cringe! try again", exception.getMessage());
@@ -246,6 +246,7 @@ public class WorldTest {
             commander1.takeOffShorts();
             assert (commander1.getClothes().stream().noneMatch(i -> i instanceof Shorts));
         }
+
         @Test
         @DisplayName("Check starting battle without cruisers")
         public void checkStartingWithoutCruisers() {
@@ -282,153 +283,177 @@ public class WorldTest {
             );
             commander2.setCruisers(alies);
 
-            assertEquals(commander2.startBattle(commander2), commander1);
+            assertEquals(commander2.startBattle(commander1), commander1);
         }
     }
 
-    @Nested
-    class MoodTest {
-        Commander commander1;
-        Commander commander2;
+    @Test
+    @DisplayName("Check second fight")
+    public void checksecFight() {
+        Set<Cruiser> enemies = new HashSet<>();
+        enemies.add(new Cruiser("1", 10, 90, 90, 55));
+        enemies.add(new Cruiser("2", 500, 95, 60, 50));
+        enemies.add(new Cruiser("3", 500, 100, 100, 45));
+        Commander commander1 = new Commander(
+                "c1", 1, Pose.STAND, Race.GUVNUTT, null, Mood.ANGRY, null
+        );
+        commander1.setCruisers(enemies);
+        Set<Cruiser> alies = new HashSet<>();
+        alies.add(new Cruiser("1", 100, 90, 90, 65));
+        alies.add(new Cruiser("2", 100, 95, 60, 60));
+        alies.add(new Cruiser("3", 100, 100, 100, 65));
+        Commander commander2 = new Commander(
+                "c1", 1, Pose.STAND, Race.GUVNUTT, null, Mood.ANGRY, null
+        );
+        commander2.setCruisers(alies);
 
-        @BeforeEach
-        void init() {
-            commander1 = new Commander(
-                    "Commander of вл'хургов",
-                    60, Pose.SIT, Race.VLHURR,
-                    null,
-                    Mood.HAPPY,
-                    new HashSet<>()
-            );
-            commander2 = new Commander(
-                    "Commander of вл'хургов",
-                    60, Pose.SIT, Race.VLHURR,
-                    null,
-                    Mood.HAPPY,
-                    new HashSet<>()
-            );
-        }
-
-        @Test
-        @DisplayName("Check listening words about mommy")
-        void checkListenToWordsAboutMommy() {
-            commander1.listenAboutMommy(commander2);
-            assertEquals(commander1.getMood(), Mood.ANGRY);
-            assertEquals(commander1.getAngryFor(), List.of(commander2));
-        }
-
-        @Test
-        @DisplayName("Check listening apologies")
-        void checkListenToApologies() {
-            commander1.listenAboutMommy(commander2);
-            assertEquals(commander1.getMood(), Mood.ANGRY);
-            assertEquals(commander1.getAngryFor(), List.of(commander2));
-
-            commander1.listenToApologies(commander2);
-            assertEquals(commander1.getMood(), Mood.HAPPY);
-            assertEquals(commander1.getAngryFor(), List.of());
-        }
-    }
-
-    @Nested
-    class PlaceTest {
-        Commander commander1;
-        Commander commander2;
-        Commander commander3;
-
-        @BeforeEach
-        void init() {
-            commander1 = new Commander(
-                    "Commander of вл'хургов",
-                    60, Pose.SIT, Race.VLHURR,
-                    null,
-                    Mood.HAPPY,
-                    new HashSet<>()
-            );
-            commander2 = new Commander(
-                    "Commander of f1",
-                    60, Pose.SIT, Race.VLHURR,
-                    null,
-                    Mood.HAPPY,
-                    new HashSet<>()
-            );
-            commander3 = new Commander(
-                    "Commander of f2",
-                    60, Pose.SIT, Race.VLHURR,
-                    null,
-                    Mood.HAPPY,
-                    new HashSet<>()
-            );
-        }
-
-        @Test
-        @DisplayName("Check silence place mood")
-        void checkHappyMood() {
-            Place bar = new Place();
-            bar.enterPlace(commander1);
-            bar.enterPlace(commander2);
-            bar.enterPlace(commander3);
-
-            assertEquals(bar.getSilenceStatus().getMood(), Mood.HAPPY);
-        }
-
-        @Test
-        @DisplayName("Check silence place mood")
-        void checkScarySilence() {
-            Place bar = new Place();
-            bar.enterPlace(commander1);
-            bar.enterPlace(commander2);
-            bar.enterPlace(commander3);
-            commander1.setMood(Mood.ANGRY);
-
-            assertEquals(bar.getSilenceStatus().getMood(), Mood.SCARY);
-        }
-
-
-        @Test
-        @DisplayName("Check no silence place mood")
-        void checkNoSilence() {
-            Place bar = new Place();
-            bar.enterPlace(commander1);
-            bar.enterPlace(commander2);
-            bar.enterPlace(commander3);
-            commander1.speak();
-
-            assertNull(bar.getSilenceStatus());
-        }
-
-        @Test
-        @DisplayName("Check turn silent")
-        void checkSilent() {
-           commander1.silent();
-            assertFalse(commander1.isSpeaking());
-        }
-
-        @Test
-        public void testConstructor() {
-            Silence silence = new Silence(Mood.HAPPY);
-            assertNotNull(silence);
-            assertEquals(Mood.HAPPY, silence.getMood());
-        }
-        @Test
-        public void testGetMood() {
-            Silence silence = new Silence(Mood.ANGRY);
-            assertEquals(Mood.ANGRY, silence.getMood());
-        }
-
-        @Test
-        public void testSetMood() {
-            Silence silence = new Silence(Mood.SCARY);
-            silence.setMood(Mood.ANGRY);
-            assertEquals(Mood.ANGRY, silence.getMood());
-        }
-
-
-        @Test
-        public void testBuilder() {
-            Silence silence = Silence.builder().mood(Mood.SCARY).build();
-            assertNotNull(silence);
-            assertEquals(Mood.SCARY, silence.getMood());
-        }
+        assertEquals(commander2.startBattle(commander1), commander1);
     }
 }
+
+@Nested
+class MoodTest {
+    Commander commander1;
+    Commander commander2;
+
+    @BeforeEach
+    void init() {
+        commander1 = new Commander(
+                "Commander of вл'хургов",
+                60, Pose.SIT, Race.VLHURR,
+                null,
+                Mood.HAPPY,
+                new HashSet<>()
+        );
+        commander2 = new Commander(
+                "Commander of вл'хургов",
+                60, Pose.SIT, Race.VLHURR,
+                null,
+                Mood.HAPPY,
+                new HashSet<>()
+        );
+    }
+
+    @Test
+    @DisplayName("Check listening words about mommy")
+    void checkListenToWordsAboutMommy() {
+        commander1.listenAboutMommy(commander2);
+        assertEquals(commander1.getMood(), Mood.ANGRY);
+        assertEquals(commander1.getAngryFor(), List.of(commander2));
+    }
+
+    @Test
+    @DisplayName("Check listening apologies")
+    void checkListenToApologies() {
+        commander1.listenAboutMommy(commander2);
+        assertEquals(commander1.getMood(), Mood.ANGRY);
+        assertEquals(commander1.getAngryFor(), List.of(commander2));
+
+        commander1.listenToApologies(commander2);
+        assertEquals(commander1.getMood(), Mood.HAPPY);
+        assertEquals(commander1.getAngryFor(), List.of());
+    }
+}
+
+@Nested
+class PlaceTest {
+    Commander commander1;
+    Commander commander2;
+    Commander commander3;
+
+    @BeforeEach
+    void init() {
+        commander1 = new Commander(
+                "Commander of вл'хургов",
+                60, Pose.SIT, Race.VLHURR,
+                null,
+                Mood.HAPPY,
+                new HashSet<>()
+        );
+        commander2 = new Commander(
+                "Commander of f1",
+                60, Pose.SIT, Race.VLHURR,
+                null,
+                Mood.HAPPY,
+                new HashSet<>()
+        );
+        commander3 = new Commander(
+                "Commander of f2",
+                60, Pose.SIT, Race.VLHURR,
+                null,
+                Mood.HAPPY,
+                new HashSet<>()
+        );
+    }
+
+    @Test
+    @DisplayName("Check silence place mood")
+    void checkHappyMood() {
+        Place bar = new Place();
+        bar.enterPlace(commander1);
+        bar.enterPlace(commander2);
+        bar.enterPlace(commander3);
+
+        assertEquals(bar.getSilenceStatus().getMood(), Mood.HAPPY);
+    }
+
+    @Test
+    @DisplayName("Check silence place mood")
+    void checkScarySilence() {
+        Place bar = new Place();
+        bar.enterPlace(commander1);
+        bar.enterPlace(commander2);
+        bar.enterPlace(commander3);
+        commander1.setMood(Mood.ANGRY);
+
+        assertEquals(bar.getSilenceStatus().getMood(), Mood.SCARY);
+    }
+
+
+    @Test
+    @DisplayName("Check no silence place mood")
+    void checkNoSilence() {
+        Place bar = new Place();
+        bar.enterPlace(commander1);
+        bar.enterPlace(commander2);
+        bar.enterPlace(commander3);
+        commander1.speak();
+
+        assertNull(bar.getSilenceStatus());
+    }
+
+    @Test
+    @DisplayName("Check turn silent")
+    void checkSilent() {
+        commander1.silent();
+        assertFalse(commander1.isSpeaking());
+    }
+
+    @Test
+    public void testConstructor() {
+        Silence silence = new Silence(Mood.HAPPY);
+        assertNotNull(silence);
+        assertEquals(Mood.HAPPY, silence.getMood());
+    }
+
+    @Test
+    public void testGetMood() {
+        Silence silence = new Silence(Mood.ANGRY);
+        assertEquals(Mood.ANGRY, silence.getMood());
+    }
+
+    @Test
+    public void testSetMood() {
+        Silence silence = new Silence(Mood.SCARY);
+        silence.setMood(Mood.ANGRY);
+        assertEquals(Mood.ANGRY, silence.getMood());
+    }
+
+    @Test
+    public void testBuilder() {
+        Silence silence = Silence.builder().mood(Mood.SCARY).build();
+        assertNotNull(silence);
+        assertEquals(Mood.SCARY, silence.getMood());
+    }
+}
+
