@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import se.ifmo.task3.Commander;
-import se.ifmo.task3.Cruiser;
-import se.ifmo.task3.Place;
-import se.ifmo.task3.Shorts;
+import se.ifmo.task3.*;
 import se.ifmo.task3.enums.ClothesAttribute;
 import se.ifmo.task3.enums.Color;
 import se.ifmo.task3.enums.Mood;
@@ -405,6 +402,33 @@ public class WorldTest {
         void checkSilent() {
            commander1.silent();
             assertFalse(commander1.isSpeaking());
+        }
+
+        @Test
+        public void testConstructor() {
+            Silence silence = new Silence(Mood.HAPPY);
+            assertNotNull(silence);
+            assertEquals(Mood.HAPPY, silence.getMood());
+        }
+        @Test
+        public void testGetMood() {
+            Silence silence = new Silence(Mood.ANGRY);
+            assertEquals(Mood.ANGRY, silence.getMood());
+        }
+
+        @Test
+        public void testSetMood() {
+            Silence silence = new Silence(Mood.SCARY);
+            silence.setMood(Mood.ANGRY);
+            assertEquals(Mood.ANGRY, silence.getMood());
+        }
+
+
+        @Test
+        public void testBuilder() {
+            Silence silence = Silence.builder().mood(Mood.SCARY).build();
+            assertNotNull(silence);
+            assertEquals(Mood.SCARY, silence.getMood());
         }
     }
 }

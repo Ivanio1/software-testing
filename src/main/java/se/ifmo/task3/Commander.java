@@ -62,7 +62,7 @@ public class Commander extends Human {
             enemiesAlive = enemiesList.stream().anyMatch(i -> i.getHealth() > 0);
             cruisersAlive = cruisersList.stream().anyMatch(i -> i.getHealth() > 0);
         }
-        if (cruisersAlive) {
+        if (cruisersList.stream().anyMatch(i -> i.getHealth() > 0)) {
             return commander;
         }
         return this;
