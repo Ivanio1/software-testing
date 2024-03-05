@@ -4,51 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba9b59af-7e56-4751-9f73-281040f01eae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tpo2/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/doc/lab1.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/doc/lab1.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/img/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/img/uml.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/src/test/java/se/ifmo/HeapSortTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/src/test/java/se/ifmo/SinTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/src/test/java/se/ifmo/WorldTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/src/test/resources/table_values.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpo2/src/test/resources/table_values_high_accuracy.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/lab1.docx" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/doc/lab1.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/lab1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/doc/lab1.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/img.png" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/img/img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/uml.png" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/img/uml.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task1/Sin.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task1/Sin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task2/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task2/HeapSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Clothes.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Clothes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Cruiser.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Cruiser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Human.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Shorts.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Shorts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/Silence.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/Silence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/ClothesAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/ClothesAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/Mood.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/Mood.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/Pose.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/Pose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/Race.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/Race.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/enums/Size.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/enums/Size.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/exceptions/BrilliantAddException.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/exceptions/BrilliantAddException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/exceptions/ClothesAlreadyPutException.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/exceptions/ClothesAlreadyPutException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/exceptions/CutShortsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/exceptions/CutShortsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/task3/exceptions/StartingBattleException.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/main/java/se/ifmo/task3/exceptions/StartingBattleException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/ifmo/HeapSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/test/java/se/ifmo/HeapSortTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/ifmo/SinTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/test/java/se/ifmo/SinTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/se/ifmo/WorldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/test/java/se/ifmo/WorldTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/table_values.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/test/resources/table_values.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/table_values_high_accuracy.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tpo1/src/test/resources/table_values_high_accuracy.csv" afterDir="false" />
-    </list>
+    <list default="true" id="ba9b59af-7e56-4751-9f73-281040f01eae" name="Changes" comment="init tpo2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,6 +39,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/tpo2" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -102,8 +62,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709627912309</updated>
-      <workItem from="1709627914685" duration="509000" />
+      <workItem from="1709627914685" duration="1322000" />
     </task>
+    <task id="LOCAL-00001" summary="init tpo2">
+      <created>1709629627430</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709629627430</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,5 +87,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init tpo2" />
+    <option name="LAST_COMMIT_MESSAGE" value="init tpo2" />
   </component>
 </project>
