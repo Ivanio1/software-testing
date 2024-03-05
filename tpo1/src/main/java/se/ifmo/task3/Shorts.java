@@ -9,7 +9,6 @@ import se.ifmo.task3.enums.Size;
 import se.ifmo.task3.exceptions.BrilliantAddException;
 import se.ifmo.task3.exceptions.CutShortsException;
 
-import java.util.List;
 import java.util.Set;
 
 @Getter
