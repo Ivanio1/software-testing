@@ -20,8 +20,7 @@ public class Csc extends TrigFunction {
 
         if (result == POSITIVE_INFINITY)
             return POSITIVE_INFINITY;
-        else if (result == NEGATIVE_INFINITY)
-            return NEGATIVE_INFINITY;
+
 
         return result;
     }

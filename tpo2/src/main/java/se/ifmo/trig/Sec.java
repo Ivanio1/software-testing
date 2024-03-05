@@ -15,14 +15,11 @@ public class Sec extends TrigFunction {
     public Double calculate(Double x, Double eps) {
         x = checkX(x);
 
-        double resultCos = cos.calculate(x,eps);
+        double resultCos = cos.calculate(x, eps);
         double result = 1.0 / resultCos;
 
         if (result == POSITIVE_INFINITY)
             return POSITIVE_INFINITY;
-        else if (result == NEGATIVE_INFINITY)
-            return NEGATIVE_INFINITY;
-
         return result;
     }
 }
