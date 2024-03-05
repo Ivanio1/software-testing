@@ -7,7 +7,7 @@ public abstract class LogFunction extends AbstractFunction {
     public Double checkX(double x) {
         x = super.checkX(x);
         if (x <= 0) {
-            throw new ArithmeticException("Х should be > 0");
+            throw new ArithmeticException("x should be > 0");
         }
         return x;
     }
