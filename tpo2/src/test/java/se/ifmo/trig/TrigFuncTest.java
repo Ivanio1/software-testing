@@ -30,7 +30,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
@@ -60,7 +60,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class TrigFuncTest {
             csvLogger.logger(x,result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
-            assertEquals("Õ should be <= 0", e.getMessage());
+            assertEquals("x should be <= 0", e.getMessage());
         }
     }
 
