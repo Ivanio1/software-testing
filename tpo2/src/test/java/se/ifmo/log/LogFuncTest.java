@@ -15,8 +15,9 @@ public class LogFuncTest {
     private final Log5 log5 = new Log5(ln);
     private final Log10 log10 = new Log10(ln);
     private final CsvLogger csvLogger = new CsvLogger();
-    private final double accuracy = 0.1;
-    private final double eps = 0.001;
+    private final LogarithmicCalculator logarithmicCalculator = new LogarithmicCalculator(ln, log2, log3, log5, log10);
+    private final double accuracy = 0.01;
+    private final double eps = 0.0001;
 
 
     @ParameterizedTest
@@ -88,4 +89,23 @@ public class LogFuncTest {
             assertEquals("x should be > 0", e.getMessage());
         }
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/InputLog/logFuncData.csv")
+    @DisplayName("logarithmic function test")
+    void logFuncTest(Double x, Double trueResult) {
+        try {
+            csvLogger.setFilePath("src/test/resources/results/logFunc.csv");
+            double result = logarithmicCalculator.calculate(x, eps);
+            csvLogger.logger(x, result);
+            assertEquals(trueResult, result, accuracy);
+        } catch (ArithmeticException e) {
+            assertEquals("x should be > 0", e.getMessage());
+        }catch (IllegalArgumentException e){
+            assertEquals("Division by zero!", e.getMessage());
+
+        }
+
+    }
+
 }
