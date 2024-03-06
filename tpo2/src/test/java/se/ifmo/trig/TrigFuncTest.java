@@ -16,6 +16,7 @@ public class TrigFuncTest {
     private final Sec sec = new Sec();
     private final Csc csc = new Csc();
     private final CsvLogger csvLogger = new CsvLogger();
+    private final TrigonometricCalculator trigonometricCalculator= new TrigonometricCalculator(sin,cos,tan,cot,sec,csc);
     private final double accuracy = 0.1;
     private final double eps = 0.001;
 
@@ -109,4 +110,18 @@ public class TrigFuncTest {
         }
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/inputTrig/trigFuncData.csv")
+    @DisplayName("trigonometric function test")
+    void trigFuncTest(Double divisible, Double divider, Double trueResult) {
+        try {
+            csvLogger.setFilePath("src/test/resources/results/trigFunc.csv");
+            double x = divisible * Math.PI / divider;
+            double result = csc.calculate(x,eps);
+            csvLogger.logger(x,result);
+            assertEquals(trueResult, result, accuracy);
+        } catch (ArithmeticException e) {
+            assertEquals("x should be <= 0", e.getMessage());
+        }
+    }
 }
