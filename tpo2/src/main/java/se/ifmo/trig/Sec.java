@@ -1,6 +1,5 @@
 package se.ifmo.trig;
 
-import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.POSITIVE_INFINITY;
 
 public class Sec extends TrigFunction {

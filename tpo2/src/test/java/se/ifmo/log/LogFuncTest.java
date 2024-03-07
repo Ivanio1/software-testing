@@ -119,8 +119,7 @@ public class LogFuncTest {
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
         }catch (IllegalArgumentException e){
-            assertEquals("Division by zero!", e.getMessage());
-
+            assertEquals("ODZ exception!", e.getMessage());
         }
 
     }

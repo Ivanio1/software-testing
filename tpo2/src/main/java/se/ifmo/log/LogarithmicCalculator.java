@@ -24,7 +24,7 @@ public class LogarithmicCalculator {
         double log10Result = log10.calculate(x, eps);
 
         double result = (((((log5Result / log2Result) / log3Result) - (lnResult + (log5Result - log3Result))) * (log10Result / log5Result)) * (Math.pow(log5Result, 3) + lnResult));
-        if (Double.isNaN(result)) throw new IllegalArgumentException("Division by zero!");
+        if (Double.isNaN(result)) throw new IllegalArgumentException("ODZ exception!");
         return result;
     }
 }

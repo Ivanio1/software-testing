@@ -25,6 +25,8 @@ public class TrigonometricCalculator {
         double secResult = sec.calculate(x, eps);
         double cscResult = csc.calculate(x, eps);
 
-        return Math.pow(((((((Math.pow(((Math.pow(Math.pow(Math.pow((((cscResult - secResult) / cscResult) / cosResult) * cotResult, 2), 2) / (sinResult * (Math.pow(secResult, 2))), 2) * (cotResult + cscResult)) / tanResult), 3)) - tanResult) / ((cotResult * (cscResult + tanResult)) * secResult)) - (cosResult + (secResult - (sinResult * cscResult)))) * sinResult) - ((cotResult * cscResult) / cscResult)), 3) + ((Math.pow(cosResult, 2)) * Math.pow(((cscResult - tanResult) / ((cscResult * secResult) - (Math.pow(cotResult, 2)))), 3));
+        double result = Math.pow(((((((Math.pow(((Math.pow(Math.pow(Math.pow((((cscResult - secResult) / cscResult) / cosResult) * cotResult, 2), 2) / (sinResult * (Math.pow(secResult, 2))), 2) * (cotResult + cscResult)) / tanResult), 3)) - tanResult) / ((cotResult * (cscResult + tanResult)) * secResult)) - (cosResult + (secResult - (sinResult * cscResult)))) * sinResult) - ((cotResult * cscResult) / cscResult)), 3) + ((Math.pow(cosResult, 2)) * Math.pow(((cscResult - tanResult) / ((cscResult * secResult) - (Math.pow(cotResult, 2)))), 3));
+        if (Double.isNaN(result)) throw new IllegalArgumentException("ODZ exception!");
+        return result;
     }
 }

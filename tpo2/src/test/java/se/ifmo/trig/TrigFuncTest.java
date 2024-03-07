@@ -140,6 +140,9 @@ public class TrigFuncTest {
             assertEquals(trueResult, result, 0.01);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            assertEquals("ODZ exception!", e.getMessage());
+
         }
     }
 }
