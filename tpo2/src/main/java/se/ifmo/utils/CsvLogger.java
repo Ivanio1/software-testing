@@ -2,9 +2,7 @@ package se.ifmo.utils;
 
 import lombok.Data;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 @Data
 public class CsvLogger {
@@ -17,11 +15,20 @@ public class CsvLogger {
         this.filePath = fileName;
     }
 
-    public void logger(double x, double y) {
-        try (PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true))) {
-            printStream.printf("%s, %s \n", x, y);
+    public void clearFile() {
+        try (PrintWriter writer = new PrintWriter(filePath)) {
+            writer.print("");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
+    public void logger(double x, double y) {
+        try (PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true))) {
+            printStream.printf("%s, %s \n", x, y);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
