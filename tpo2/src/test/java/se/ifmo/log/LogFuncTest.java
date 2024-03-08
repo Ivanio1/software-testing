@@ -2,6 +2,7 @@ package se.ifmo.log;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -36,6 +37,16 @@ public class LogFuncTest {
         }
     }
 
+
+    @Test
+    @DisplayName("checkX test")
+    void checkTest() {
+        try {
+            ln.calculate(Double.NaN, eps);
+        } catch (ArithmeticException e) {
+            assertEquals("x should be > 0", e.getMessage());
+        }
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/InputLog/lnData.csv")

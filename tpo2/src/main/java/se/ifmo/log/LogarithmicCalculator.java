@@ -16,6 +16,14 @@ public class LogarithmicCalculator {
         this.log10 = log10;
     }
 
+    public LogarithmicCalculator() {
+        this.ln = new Ln();
+        this.log2 = new Log2(ln);
+        this.log3 = new Log3(ln);
+        this.log5 = new Log5(ln);
+        this.log10 = new Log10(ln);
+    }
+
     public Double calculate(Double x, Double eps) {
         double lnResult = ln.calculate(x, eps);
         double log2Result = log2.calculate(x, eps);

@@ -22,8 +22,9 @@ public class LogIntegrationTest {
     private static final Log3 log3 = mock(Log3.class);
     private static final Log5 log5 = mock(Log5.class);
     private static final Log10 log10 = mock(Log10.class);
-    private static final double eps = 0.0001;
+    private static final double eps = 0.0000001;
     private final double accuracy = 0.1;
+
 
     @BeforeAll
     public static void setup() {
@@ -51,12 +52,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with full mocks")
     void testFunctionWithMocks(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(ln,log2,log3,log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(ln, log2, log3, log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -66,12 +67,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with ln")
     void testFunctionWithLn(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),log2,log3,log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), log2, log3, log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -81,12 +82,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log2")
     void testFunctionWithLog2(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(ln),log3,log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(ln), log3, log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -96,12 +97,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log2 deeper")
     void testFunctionWithLog2Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),log3,log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), log3, log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -111,12 +112,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log3")
     void testFunctionWithLog3(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(ln),log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -126,12 +127,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log3 deeper")
     void testFunctionWithLog3Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(new Ln()),log5,log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), log5, log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -141,12 +142,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log5")
     void testFunctionWithLog5(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(ln),new Log5(ln),log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(ln), log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -156,12 +157,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log5 deeper")
     void testFunctionWithLog5Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(new Ln()),new Log5(new Ln()),log10);
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), log10);
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -171,12 +172,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log10")
     void testFunctionWithLog10(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(ln),new Log5(new Ln()),new Log10(ln));
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(new Ln()), new Log10(ln));
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }
@@ -186,12 +187,12 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log10 deeper")
     void testFunctionWithLog10Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(),new Log2(new Ln()),new Log3(new Ln()),new Log5(new Ln()),new Log10(new Ln()));
+            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), new Log10(new Ln()));
             double result = calculator.calculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
     }

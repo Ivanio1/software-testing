@@ -9,7 +9,6 @@ public class Log5 extends LogFunction{
     @Override
     public Double calculate(Double x, Double eps) {
         x = checkX(x);
-
         return ln.calculate(x,eps)/ 1.60943791243;
     }
 }

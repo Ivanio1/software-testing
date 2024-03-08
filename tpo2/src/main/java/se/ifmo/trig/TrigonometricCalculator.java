@@ -17,6 +17,15 @@ public class TrigonometricCalculator {
         this.csc = csc;
     }
 
+    public TrigonometricCalculator() {
+        this.sin = new Sin();
+        this.cos = new Cos();
+        this.tan = new Tan();
+        this.cot = new Cot();
+        this.sec = new Sec();
+        this.csc = new Csc();
+    }
+
     public Double calculate(Double x, Double eps) {
         double sinResult = sin.calculate(x, eps);
         double cosResult = cos.calculate(x, eps);

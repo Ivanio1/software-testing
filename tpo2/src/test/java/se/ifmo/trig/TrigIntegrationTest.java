@@ -26,6 +26,7 @@ public class TrigIntegrationTest {
     private static final double eps = 0.0000001;
     private final double accuracy = 0.01;
 
+
     @BeforeAll
     public static void setup(){
         fillMock(sin, "src/test/resources/inputTrig/sinData.csv");
@@ -34,6 +35,7 @@ public class TrigIntegrationTest {
         fillMock(cot, "src/test/resources/inputTrig/cotData.csv");
         fillMock(sec, "src/test/resources/inputTrig/secData.csv");
         fillMock(csc, "src/test/resources/inputTrig/cscData.csv");
+
     }
 
     private static void fillMock(TrigFunction tf, String tableName){
@@ -45,9 +47,9 @@ public class TrigIntegrationTest {
                 when(tf.calculate(x, TrigIntegrationTest.eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
-
         }
     }
+
 
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/trigFuncData.csv")
