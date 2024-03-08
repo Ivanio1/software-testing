@@ -137,7 +137,7 @@ public class TrigFuncTest {
             double x = divisible * Math.PI / divider;
             double result = trigonometricCalculator.calculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, 0.01);
+            assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {

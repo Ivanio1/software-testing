@@ -9,6 +9,9 @@ public class Sec extends TrigFunction {
     public Sec() {
         this.cos = new Cos();
     }
+    public Sec(Cos cos) {
+        this.cos = cos;
+    }
 
     @Override
     public Double calculate(Double x, Double eps) {

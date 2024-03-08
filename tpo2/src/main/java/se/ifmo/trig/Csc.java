@@ -9,6 +9,9 @@ public class Csc extends TrigFunction {
     public Csc() {
         this.sin = new Sin();
     }
+    public Csc(Sin sin) {
+        this.sin = sin;
+    }
 
     @Override
     public Double calculate(Double x, Double eps) {

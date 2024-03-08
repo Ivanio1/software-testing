@@ -10,6 +10,9 @@ public class Cos extends TrigFunction {
         this.sin = new Sin();
     }
 
+    public Cos(Sin sin) {
+        this.sin = sin;
+    }
     @Override
     public Double calculate(Double x, Double eps) {
         x = checkX(x);

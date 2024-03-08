@@ -12,6 +12,11 @@ public class Tan extends TrigFunction {
         this.cos = new Cos();
     }
 
+    public Tan(Sin sin, Cos cos) {
+        this.sin = sin;
+        this.cos = cos;
+    }
+
     @Override
     public Double calculate(Double x, Double eps) {
         x = checkX(x);
