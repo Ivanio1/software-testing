@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import se.ifmo.log.*;
 import se.ifmo.trig.*;
+import se.ifmo.utils.CsvLogger;
 
 
 import java.io.FileReader;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class SystemIntegrationTest {
     private final double accuracy = 0.01;
     private final double eps = 0.0000001;
-
+    private final CsvLogger csvLogger = new CsvLogger();
     public TrigonometricCalculator trigCalculator = mock(TrigonometricCalculator.class);
     public  LogarithmicCalculator logCalculator = mock(LogarithmicCalculator.class);
 
@@ -115,10 +116,12 @@ public class SystemIntegrationTest {
     @DisplayName("noMock")
     void noMock(Double x, Double trueResult) {
         try {
+            csvLogger.setFilePath("src/test/resources/results/mainFunc.csv");
             var trigCalculator = new TrigonometricCalculator();
             var logCalculator = new LogarithmicCalculator();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
             double result = calculator.calculate(x, eps);
+            csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
