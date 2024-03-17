@@ -21,7 +21,7 @@ public class LogFuncTest {
     private final Log5 log5 = new Log5(ln);
     private final Log10 log10 = new Log10(ln);
     private final CsvLogger csvLogger = new CsvLogger();
-    private final LogarithmicCalculator logarithmicCalculator = new LogarithmicCalculator(ln, log2, log3, log5, log10);
+    private final LogarithmicFunctionCalculator logarithmicFunctionCalculator = new LogarithmicFunctionCalculator(ln, log2, log3, log5, log10);
     private final double accuracy = 0.01;
     private final double eps = 0.0001;
 
@@ -42,7 +42,7 @@ public class LogFuncTest {
     @DisplayName("checkX test")
     void checkTest() {
         try {
-            ln.calculate(Double.NaN, eps);
+            ln.checkAndCalculate(Double.NaN, eps);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
         }
@@ -54,7 +54,7 @@ public class LogFuncTest {
     void lnTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/ln.csv");
-            double result = ln.calculate(x, eps);
+            double result = ln.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -68,7 +68,7 @@ public class LogFuncTest {
     void log3Test(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/log3.csv");
-            double result = log3.calculate(x, eps);
+            double result = log3.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -82,7 +82,7 @@ public class LogFuncTest {
     void log2Test(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/log2.csv");
-            double result = log2.calculate(x, eps);
+            double result = log2.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -96,7 +96,7 @@ public class LogFuncTest {
     void log5Test(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/log5.csv");
-            double result = log5.calculate(x, eps);
+            double result = log5.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -110,7 +110,7 @@ public class LogFuncTest {
     void log10Test(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/log10.csv");
-            double result = log10.calculate(x, eps);
+            double result = log10.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -124,12 +124,12 @@ public class LogFuncTest {
     void logFuncTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/log/logFunc.csv");
-            double result = logarithmicCalculator.calculate(x, eps);
+            double result = logarithmicFunctionCalculator.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("ODZ exception!", e.getMessage());
         }
 

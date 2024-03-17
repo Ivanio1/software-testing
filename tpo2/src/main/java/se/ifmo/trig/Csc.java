@@ -1,6 +1,6 @@
 package se.ifmo.trig;
 
-import static java.lang.Double.POSITIVE_INFINITY;
+import static java.lang.Math.PI;
 
 public class Csc extends TrigFunction {
 
@@ -9,21 +9,17 @@ public class Csc extends TrigFunction {
     public Csc() {
         this.sin = new Sin();
     }
+
     public Csc(Sin sin) {
         this.sin = sin;
     }
 
     @Override
-    public Double calculate(Double x, Double eps) {
-        x = checkX(x);
+    public Double calculateValue(Double x, Double eps) {
+        x = x % (2 * PI);
 
-        double resultSin = sin.calculate(x,eps);
-        double result = 1.0 / resultSin;
+        double resultSin = sin.calculateValue(x, eps);
 
-        if (result == POSITIVE_INFINITY)
-            return POSITIVE_INFINITY;
-
-
-        return result;
+        return 1.0 / resultSin;
     }
 }

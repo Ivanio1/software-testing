@@ -1,6 +1,8 @@
 package se.ifmo.log;
 
-public class LogarithmicCalculator {
+import se.ifmo.AbstractFunction;
+
+public class LogarithmicFunctionCalculator extends AbstractFunction {
 
     private final Ln ln;
     private final Log2 log2;
@@ -8,7 +10,7 @@ public class LogarithmicCalculator {
     private final Log5 log5;
     private final Log10 log10;
 
-    public LogarithmicCalculator(Ln ln, Log2 log2, Log3 log3, Log5 log5, Log10 log10) {
+    public LogarithmicFunctionCalculator(Ln ln, Log2 log2, Log3 log3, Log5 log5, Log10 log10) {
         this.ln = ln;
         this.log2 = log2;
         this.log3 = log3;
@@ -16,7 +18,7 @@ public class LogarithmicCalculator {
         this.log10 = log10;
     }
 
-    public LogarithmicCalculator() {
+    public LogarithmicFunctionCalculator() {
         this.ln = new Ln();
         this.log2 = new Log2(ln);
         this.log3 = new Log3(ln);
@@ -24,12 +26,13 @@ public class LogarithmicCalculator {
         this.log10 = new Log10(ln);
     }
 
-    public Double calculate(Double x, Double eps) {
-        double lnResult = ln.calculate(x, eps);
-        double log2Result = log2.calculate(x, eps);
-        double log3Result = log3.calculate(x, eps);
-        double log5Result = log5.calculate(x, eps);
-        double log10Result = log10.calculate(x, eps);
+    @Override
+    public Double calculateValue(Double x, Double eps) {
+        double lnResult = ln.checkAndCalculate(x, eps);
+        double log2Result = log2.checkAndCalculate(x, eps);
+        double log3Result = log3.checkAndCalculate(x, eps);
+        double log5Result = log5.checkAndCalculate(x, eps);
+        double log10Result = log10.checkAndCalculate(x, eps);
         double result = (((((log5Result / log2Result) / log3Result) - (lnResult + (log5Result - log3Result))) * (log10Result / log5Result)) * (Math.pow(log5Result, 3) + lnResult));
         if (Double.isNaN(result)) throw new IllegalArgumentException("ODZ exception!");
         return result;

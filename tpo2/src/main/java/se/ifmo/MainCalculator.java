@@ -1,23 +1,24 @@
 package se.ifmo;
 
-import se.ifmo.log.LogarithmicCalculator;
-import se.ifmo.trig.TrigonometricCalculator;
+import se.ifmo.log.LogarithmicFunctionCalculator;
+import se.ifmo.trig.TrigonometricFunctionCalculator;
 
-public class MainCalculator {
+public class MainCalculator extends AbstractFunction{
 
-    private final LogarithmicCalculator logCalculator;
-    private final TrigonometricCalculator trigCalculator;
+    private final LogarithmicFunctionCalculator logCalculator;
+    private final TrigonometricFunctionCalculator trigCalculator;
 
-    public MainCalculator(LogarithmicCalculator logCalculator, TrigonometricCalculator trigCalculator) {
+    public MainCalculator(LogarithmicFunctionCalculator logCalculator, TrigonometricFunctionCalculator trigCalculator) {
         this.logCalculator = logCalculator;
         this.trigCalculator = trigCalculator;
     }
 
-    public Double calculate(Double x, Double eps) {
+    @Override
+    public Double calculateValue(Double x, Double eps) {
         if (x > 0) {
-            return logCalculator.calculate(x, eps);
+            return logCalculator.checkAndCalculate(x, eps);
         } else {
-            return trigCalculator.calculate(x, eps);
+            return trigCalculator.checkAndCalculate(x, eps);
         }
     }
 

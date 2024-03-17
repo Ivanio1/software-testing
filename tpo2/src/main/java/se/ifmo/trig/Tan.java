@@ -2,6 +2,7 @@ package se.ifmo.trig;
 
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.POSITIVE_INFINITY;
+import static java.lang.Math.PI;
 
 public class Tan extends TrigFunction {
     private final Sin sin;
@@ -18,11 +19,11 @@ public class Tan extends TrigFunction {
     }
 
     @Override
-    public Double calculate(Double x, Double eps) {
-        x = checkX(x);
+    public Double calculateValue(Double x, Double eps) {
+        x = x % (2 * PI);
 
-        double resultSin = sin.calculate(x,eps);
-        double resultCos = cos.calculate(x,eps);
+        double resultSin = sin.calculateValue(x, eps);
+        double resultCos = cos.calculateValue(x, eps);
 
         if (resultCos == 0.0 && resultSin > 0) {
             return POSITIVE_INFINITY;

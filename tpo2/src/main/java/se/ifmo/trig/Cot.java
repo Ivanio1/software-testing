@@ -2,6 +2,7 @@ package se.ifmo.trig;
 
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.POSITIVE_INFINITY;
+import static java.lang.Math.PI;
 
 public class Cot extends TrigFunction {
 
@@ -19,10 +20,10 @@ public class Cot extends TrigFunction {
     }
 
     @Override
-    public Double calculate(Double x, Double eps) {
-        x = checkX(x);
-        double resultSin = sin.calculate(x,eps);
-        double resultCos = cos.calculate(x,eps);
+    public Double calculateValue(Double x, Double eps) {
+        x = x % (2 * PI);
+        double resultSin = sin.calculateValue(x, eps);
+        double resultCos = cos.calculateValue(x, eps);
 
         if (resultSin == 0.0 && resultCos > 0) {
             return POSITIVE_INFINITY;

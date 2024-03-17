@@ -2,12 +2,8 @@ package se.ifmo.log;
 
 public class Ln extends LogFunction {
     @Override
-    public Double calculate(Double x, Double eps) {
-
-        x = checkX(x);
-
+    public Double calculateValue(Double x, Double eps) {
         double constant = ((x - 1) * (x - 1)) / ((x + 1) * (x + 1));
-
         double sum = 0;
         double currentValue = (x - 1) / (x + 1);
         int step = 1;

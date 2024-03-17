@@ -21,7 +21,7 @@ public class TrigFuncTest {
     private final Sec sec = new Sec();
     private final Csc csc = new Csc();
     private final CsvLogger csvLogger = new CsvLogger();
-    private final TrigonometricCalculator trigonometricCalculator = new TrigonometricCalculator(sin, cos, tan, cot, sec, csc);
+    private final TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(sin, cos, tan, cot, sec, csc);
     private final double accuracy = 0.1;
     private final double eps = 0.0000001;
 
@@ -45,7 +45,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/sin.csv");
             double x = divisible * Math.PI / divider;
-            double result = sin.calculate(x, eps);
+            double result = sin.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -60,7 +60,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/cos.csv");
             double x = divisible * Math.PI / divider;
-            double result = cos.calculate(x, eps);
+            double result = cos.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -75,7 +75,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/tan.csv");
             double x = divisible * Math.PI / divider;
-            double result = tan.calculate(x, eps);
+            double result = tan.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -90,7 +90,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/cot.csv");
             double x = divisible * Math.PI / divider;
-            double result = cot.calculate(x, eps);
+            double result = cot.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -105,7 +105,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/sec.csv");
             double x = divisible * Math.PI / divider;
-            double result = sec.calculate(x, eps);
+            double result = sec.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -120,7 +120,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/csc.csv");
             double x = divisible * Math.PI / divider;
-            double result = csc.calculate(x, eps);
+            double result = csc.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
@@ -135,7 +135,7 @@ public class TrigFuncTest {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/trigFunc.csv");
             double x = divisible * Math.PI / divider;
-            double result = trigonometricCalculator.calculate(x, eps);
+            double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {

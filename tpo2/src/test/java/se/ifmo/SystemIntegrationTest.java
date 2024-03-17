@@ -27,8 +27,8 @@ public class SystemIntegrationTest {
     private final double accuracy = 0.01;
     private final double eps = 0.0000001;
     private final CsvLogger csvLogger = new CsvLogger();
-    public TrigonometricCalculator trigCalculator = mock(TrigonometricCalculator.class);
-    public  LogarithmicCalculator logCalculator = mock(LogarithmicCalculator.class);
+    public TrigonometricFunctionCalculator trigCalculator = mock(TrigonometricFunctionCalculator.class);
+    public LogarithmicFunctionCalculator logCalculator = mock(LogarithmicFunctionCalculator.class);
 
     @BeforeAll
     public void setup() {
@@ -36,7 +36,7 @@ public class SystemIntegrationTest {
         fillMock(trigCalculator);
     }
 
-    private void fillMock(TrigonometricCalculator tf) {
+    private void fillMock(TrigonometricFunctionCalculator tf) {
         try (CSVReader csvReader = new CSVReader(new FileReader("src/test/resources/inputTrig/trigFuncData.csv"))) {
             List<String[]> records = csvReader.readAll();
             for (String[] record : records) {
@@ -44,19 +44,19 @@ public class SystemIntegrationTest {
                 final double divider = Double.parseDouble(record[1]);
                 final double y = Double.parseDouble(record[2]);
                 double x = divisible * Math.PI / divider;
-                when(tf.calculate(x, eps)).thenReturn(y);
+                when(tf.checkAndCalculate(x, eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
         }
     }
 
-    private void fillMock(LogarithmicCalculator tf) {
+    private void fillMock(LogarithmicFunctionCalculator tf) {
         try (CSVReader csvReader = new CSVReader(new FileReader("src/test/resources/inputLog/logFuncData.csv"))) {
             List<String[]> records = csvReader.readAll();
             for (String[] record : records) {
                 final double x = Double.parseDouble(record[0]);
                 final double y = Double.parseDouble(record[1]);
-                when(tf.calculate(x, eps)).thenReturn(y);
+                when(tf.checkAndCalculate(x, eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
         }
@@ -70,7 +70,7 @@ public class SystemIntegrationTest {
             LogIntegrationTest.setup();
             TrigIntegrationTest.setup();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
-            double result = calculator.calculate(x, eps);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
@@ -84,9 +84,9 @@ public class SystemIntegrationTest {
     @DisplayName("trigMock")
     void trigMock(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator logCalculator = new LogarithmicCalculator();
+            LogarithmicFunctionCalculator logCalculator = new LogarithmicFunctionCalculator();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
-            double result = calculator.calculate(x, eps);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
@@ -100,9 +100,9 @@ public class SystemIntegrationTest {
     @DisplayName("logMock")
     void logMock(Double x, Double trueResult) {
         try {
-            var trigCalculator = new TrigonometricCalculator();
+            var trigCalculator = new TrigonometricFunctionCalculator();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
-            double result = calculator.calculate(x, eps);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
@@ -117,10 +117,10 @@ public class SystemIntegrationTest {
     void noMock(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/mainFunc.csv");
-            var trigCalculator = new TrigonometricCalculator();
-            var logCalculator = new LogarithmicCalculator();
+            var trigCalculator = new TrigonometricFunctionCalculator();
+            var logCalculator = new LogarithmicFunctionCalculator();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
-            double result = calculator.calculate(x, eps);
+            double result = calculator.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {

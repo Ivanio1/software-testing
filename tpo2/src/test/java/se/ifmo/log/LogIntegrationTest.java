@@ -41,7 +41,7 @@ public class LogIntegrationTest {
             for (String[] record : records) {
                 final double x = Double.parseDouble(record[0]);
                 final double y = Double.parseDouble(record[1]);
-                when(tf.calculate(x, LogIntegrationTest.eps)).thenReturn(y);
+                when(tf.checkAndCalculate(x, LogIntegrationTest.eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
         }
@@ -52,8 +52,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with full mocks")
     void testFunctionWithMocks(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(ln, log2, log3, log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(ln, log2, log3, log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -67,8 +67,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with ln")
     void testFunctionWithLn(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), log2, log3, log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), log2, log3, log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -82,8 +82,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log2")
     void testFunctionWithLog2(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(ln), log3, log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(ln), log3, log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -97,8 +97,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log2 deeper")
     void testFunctionWithLog2Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), log3, log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), log3, log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -112,8 +112,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log3")
     void testFunctionWithLog3(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -127,8 +127,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log3 deeper")
     void testFunctionWithLog3Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), log5, log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), log5, log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -142,8 +142,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log5")
     void testFunctionWithLog5(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(ln), log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(ln), log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -157,8 +157,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log5 deeper")
     void testFunctionWithLog5Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), log10);
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), log10);
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -172,8 +172,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log10")
     void testFunctionWithLog10(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(new Ln()), new Log10(ln));
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(ln), new Log5(new Ln()), new Log10(ln));
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
@@ -187,8 +187,8 @@ public class LogIntegrationTest {
     @DisplayName("logarithmic function test with log10 deeper")
     void testFunctionWithLog10Deeper(Double x, Double trueResult) {
         try {
-            LogarithmicCalculator calculator = new LogarithmicCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), new Log10(new Ln()));
-            double result = calculator.calculate(x, eps);
+            LogarithmicFunctionCalculator calculator = new LogarithmicFunctionCalculator(new Ln(), new Log2(new Ln()), new Log3(new Ln()), new Log5(new Ln()), new Log10(new Ln()));
+            double result = calculator.checkAndCalculate(x, eps);
             assertEquals(trueResult, result, accuracy);
         } catch (ArithmeticException e) {
             assertEquals("x should be > 0", e.getMessage());
