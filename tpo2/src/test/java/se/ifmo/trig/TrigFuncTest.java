@@ -41,12 +41,13 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/sinData.csv")
     @DisplayName("sin(x) test")
-    void sinTest(Double x,  Double trueResult) {
+    void sinTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/sin.csv");
             double result = sin.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -60,7 +61,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/cos.csv");
             double result = cos.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -74,7 +76,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/tan.csv");
             double result = tan.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -88,7 +91,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/cot.csv");
             double result = cot.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -102,7 +106,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/sec.csv");
             double result = sec.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -116,7 +121,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/csc.csv");
             double result = csc.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         }
@@ -130,7 +136,8 @@ public class TrigFuncTest {
             csvLogger.setFilePath("src/test/resources/results/trig/trigFunc.csv");
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {

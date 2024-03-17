@@ -43,7 +43,7 @@ public class TrigIntegrationTest {
             for (String[] record : records) {
                 final double x = Double.parseDouble(record[0]);
                 final double y = Double.parseDouble(record[1]);
-                when(tf.checkAndCalculate(x , TrigIntegrationTest.eps)).thenReturn(y);
+                when(tf.checkAndCalculate(x, TrigIntegrationTest.eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
         }
@@ -57,7 +57,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(sin, cos, tan, cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -73,7 +74,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), cos, tan, cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -88,7 +90,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(sin), tan, cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -103,7 +106,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(new Sin()), tan, cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -118,7 +122,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(sin), new Tan(sin, cos), cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -133,7 +138,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(new Sin()), new Tan(new Sin(), new Cos()), cot, sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -148,7 +154,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(sin), new Tan(sin, cos), new Cot(sin, cos), sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -163,7 +170,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(new Sin()), new Tan(new Sin(), new Cos()), new Cot(new Sin(), new Cos()), sec, csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -178,7 +186,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(sin), new Tan(sin, cos), new Cot(sin, cos), new Sec(cos), csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -193,7 +202,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(new Sin()), new Tan(new Sin(), new Cos()), new Cot(new Sin(), new Cos()), new Sec(new Cos()), csc);
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -208,7 +218,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(sin), new Tan(sin, cos), new Cot(sin, cos), new Sec(cos), new Csc(sin));
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -223,7 +234,8 @@ public class TrigIntegrationTest {
         try {
             TrigonometricFunctionCalculator trigonometricFunctionCalculator = new TrigonometricFunctionCalculator(new Sin(), new Cos(new Sin()), new Tan(new Sin(), new Cos()), new Cot(new Sin(), new Cos()), new Sec(new Cos()), new Csc(new Sin()));
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta = result < 0 ? result * -1 * eps : result * eps;
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {

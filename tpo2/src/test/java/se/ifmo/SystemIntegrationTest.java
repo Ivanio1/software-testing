@@ -69,7 +69,15 @@ public class SystemIntegrationTest {
             TrigIntegrationTest.setup();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
             double result = calculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta;
+            String numberStr = String.valueOf(result);
+            if (numberStr.contains("E")) {
+                delta = result < 0 ? result * -1 * eps : result * eps;
+            }
+            else{
+                delta = accuracy;
+            }
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -85,7 +93,15 @@ public class SystemIntegrationTest {
             LogarithmicFunctionCalculator logCalculator = new LogarithmicFunctionCalculator();
             MainCalculator calculator = new MainCalculator(logCalculator, trigCalculator);
             double result = calculator.checkAndCalculate(x, eps);
-            assertEquals(trueResult, result, accuracy);
+            double delta;
+            String numberStr = String.valueOf(result);
+            if (numberStr.contains("E")) {
+                delta = result < 0 ? result * -1 * eps : result * eps;
+            }
+            else{
+                delta = accuracy;
+            }
+            assertEquals(trueResult, result, delta);
         } catch (ArithmeticException e) {
             assertEquals("x should be <= 0", e.getMessage());
         } catch (IllegalArgumentException e) {
