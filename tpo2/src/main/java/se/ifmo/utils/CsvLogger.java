@@ -15,16 +15,15 @@ public class CsvLogger {
     public void clearFile() {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             writer.print("");
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
+        } catch (FileNotFoundException ignored) {
         }
     }
 
+
     public void logger(double x, double y) {
         try (PrintStream printStream = new PrintStream(new FileOutputStream(filePath, true))) {
-            printStream.printf("%s, %s \n", x, y);
-        } catch (IOException exception) {
-            exception.printStackTrace();
+            printStream.printf("%s, %s\n", x, y);
+        } catch (IOException ignored) {
         }
     }
 

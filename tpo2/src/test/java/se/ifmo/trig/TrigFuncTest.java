@@ -41,10 +41,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/sinData.csv")
     @DisplayName("sin(x) test")
-    void sinTest(Double divisible, Double divider, Double trueResult) {
+    void sinTest(Double x,  Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/sin.csv");
-            double x = divisible * Math.PI / divider;
             double result = sin.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -56,10 +55,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/cosData.csv")
     @DisplayName("cos(x) test")
-    void cosTest(Double divisible, Double divider, Double trueResult) {
+    void cosTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/cos.csv");
-            double x = divisible * Math.PI / divider;
             double result = cos.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -71,10 +69,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/tanData.csv")
     @DisplayName("tan(x) test")
-    void tanTest(Double divisible, Double divider, Double trueResult) {
+    void tanTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/tan.csv");
-            double x = divisible * Math.PI / divider;
             double result = tan.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -86,10 +83,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/cotData.csv")
     @DisplayName("cot(x) test")
-    void cotTest(Double divisible, Double divider, Double trueResult) {
+    void cotTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/cot.csv");
-            double x = divisible * Math.PI / divider;
             double result = cot.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -101,10 +97,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/secData.csv")
     @DisplayName("sec(x) test")
-    void secTest(Double divisible, Double divider, Double trueResult) {
+    void secTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/sec.csv");
-            double x = divisible * Math.PI / divider;
             double result = sec.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -116,10 +111,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/cscData.csv")
     @DisplayName("csc(x) test")
-    void cscTest(Double divisible, Double divider, Double trueResult) {
+    void cscTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/csc.csv");
-            double x = divisible * Math.PI / divider;
             double result = csc.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);
@@ -131,10 +125,9 @@ public class TrigFuncTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/inputTrig/trigFuncData.csv")
     @DisplayName("trigonometric function test")
-    void trigFuncTest(Double divisible, Double divider, Double trueResult) {
+    void trigFuncTest(Double x, Double trueResult) {
         try {
             csvLogger.setFilePath("src/test/resources/results/trig/trigFunc.csv");
-            double x = divisible * Math.PI / divider;
             double result = trigonometricFunctionCalculator.checkAndCalculate(x, eps);
             csvLogger.logger(x, result);
             assertEquals(trueResult, result, accuracy);

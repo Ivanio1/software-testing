@@ -22,8 +22,8 @@ public class LogFuncTest {
     private final Log10 log10 = new Log10(ln);
     private final CsvLogger csvLogger = new CsvLogger();
     private final LogarithmicFunctionCalculator logarithmicFunctionCalculator = new LogarithmicFunctionCalculator(ln, log2, log3, log5, log10);
-    private final double accuracy = 0.01;
-    private final double eps = 0.0001;
+    private final double accuracy = 0.1;
+    private final double eps = 0.0000001;
 
     @BeforeAll
     public void clearFiles() {

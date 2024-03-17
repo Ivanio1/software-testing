@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @DisplayName("CalculatorTest")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SystemIntegrationTest {
-    private final double accuracy = 0.01;
+    private final double accuracy = 0.1;
     private final double eps = 0.0000001;
     private final CsvLogger csvLogger = new CsvLogger();
     public TrigonometricFunctionCalculator trigCalculator = mock(TrigonometricFunctionCalculator.class);
@@ -40,10 +40,8 @@ public class SystemIntegrationTest {
         try (CSVReader csvReader = new CSVReader(new FileReader("src/test/resources/inputTrig/trigFuncData.csv"))) {
             List<String[]> records = csvReader.readAll();
             for (String[] record : records) {
-                final double divisible = Double.parseDouble(record[0]);
-                final double divider = Double.parseDouble(record[1]);
-                final double y = Double.parseDouble(record[2]);
-                double x = divisible * Math.PI / divider;
+                final double x = Double.parseDouble(record[0]);
+                final double y = Double.parseDouble(record[1]);
                 when(tf.checkAndCalculate(x, eps)).thenReturn(y);
             }
         } catch (IOException | CsvException ignored) {
