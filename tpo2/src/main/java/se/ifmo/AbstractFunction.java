@@ -18,9 +18,6 @@ public abstract class AbstractFunction {
 
     public final Double checkAndCalculate(Double x, Double eps) {
         checkX(x);
-        if(isNaN(x)) {
-            return x;
-        }
         return calculateValue(x, eps);
     }
 }
