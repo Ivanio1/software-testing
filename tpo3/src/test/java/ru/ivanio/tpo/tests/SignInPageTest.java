@@ -43,6 +43,7 @@ public class SignInPageTest extends PageTestBase {
     protected void preparePages(WebDriver driver) {
         HomePage homePage = HomePage.initialize(driver);
         homePage.acceptCookies();
+        homePage.acceptRegion();
         homePage.goToSignIn();
         signInPage = SignInPage.initialize(driver);
     }

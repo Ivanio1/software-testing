@@ -27,6 +27,9 @@ public abstract class Page {
     public WebElement cookiesAccept;
 
 
+    @FindBy(how = How.XPATH, using = "//button[@data-qa=\"region-clarification-confirm\"]")
+    public WebElement regionAccept;
+
 
     public void acceptCookies() {
         try {
@@ -42,6 +45,22 @@ public abstract class Page {
             System.out.println("No cookies accept button!");
         }
     }
+
+    public void acceptRegion() {
+        try {
+            regionAccept.click();
+            new WebDriverWait(driver, 1).until(d -> {
+                try {
+                    return !regionAccept.isDisplayed();
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    return true;
+                }
+            });
+        } catch (NoSuchElementException e) {
+            System.out.println("No region accept button!");
+        }
+    }
+
 
 
     protected static<T> T initialize(WebDriver driver, String checkXpath, Class<T> clazz) {
