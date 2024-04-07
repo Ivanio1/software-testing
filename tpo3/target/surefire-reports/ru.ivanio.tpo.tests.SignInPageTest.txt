@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: ru.ivanio.tpo.tests.SignInPageTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 10.727 s <<< FAILURE! - in ru.ivanio.tpo.tests.SignInPageTest
+wrongEmail{WebDriver}[1]  Time elapsed: 9.48 s  <<< ERROR!
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for ru.ivanio.tpo.pages.Page$$Lambda$627/0x000000a8011d88c0@4e858e0a (tried for 5 second(s) with 500 milliseconds interval)
+	at ru.ivanio.tpo.tests.SignInPageTest.preparePages(SignInPageTest.java:26)
+Caused by: org.openqa.selenium.NoSuchElementException: 
+Unable to locate element: //*[@data-qa="login"]
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'admins-Air-2.HomeLAN', ip: 'fe80:0:0:0:96:2cfb:3027:715%en0', os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '14.4.1', java.version: '17.0.10'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: false, browserName: firefox, browserVersion: 124.0.2, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20240401114208, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 23.4.0, moz:processID: 45860, moz:profile: /var/folders/pf/v1c2t1hs6y9..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 7216f6c0-8cf5-4db2-98d5-80d753371f1f
+*** Element info: {Using=xpath, value=//*[@data-qa="login"]}
+	at ru.ivanio.tpo.tests.SignInPageTest.preparePages(SignInPageTest.java:26)
+

@@ -1,0 +1,4 @@
+browserName=firefox
+nativeEvents=false
+driverKey=webdriver.gecko.driver
+webdriver.firefox.bin=/Applications/Firefox.app/Contents/MacOS/firefox
