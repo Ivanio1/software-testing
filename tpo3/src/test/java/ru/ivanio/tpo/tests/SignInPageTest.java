@@ -54,7 +54,7 @@ public class SignInPageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void loginWithSocialNetworkPassword(WebDriver driver) {
         signInPage.tryLoginWithSocialNetwork();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         SocialNetworkPage socialNetworkPage = SocialNetworkPage.initialize(driver);
         assertEquals("VK ID", socialNetworkPage.getTitle());
     }

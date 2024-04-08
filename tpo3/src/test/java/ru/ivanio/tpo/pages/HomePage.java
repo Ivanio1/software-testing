@@ -1,5 +1,7 @@
 package ru.ivanio.tpo.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +28,8 @@ public class HomePage extends Page {
     }
 
     public void goToSignIn() {
-        signInButton.click();
+        WebElement element = driver.findElement(By.xpath("//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 }
