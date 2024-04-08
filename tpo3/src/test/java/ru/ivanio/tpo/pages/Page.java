@@ -19,16 +19,15 @@ public abstract class Page {
     this.driver = driver;
   }
 
-    @FindBy(how = How.XPATH, using = "//button[@data-qa=\"cookies-policy-informer-accept\"]")
-    public WebElement cookiesAccept;
-
+    @FindBy(how = How.XPATH, using = "//*[@class=\"cookie-policy-popup__button r-btn r-btn_full-width r-btn_large primary\"]")
+    public WebElement acceptCookiesBtn;
 
     public void acceptCookies() {
         try {
-            cookiesAccept.click();
-            new WebDriverWait(driver, 1).until(d -> {
+            acceptCookiesBtn.click();
+            new WebDriverWait(driver, 5).until(d -> {
                 try {
-                    return !cookiesAccept.isDisplayed();
+                    return !acceptCookiesBtn.isDisplayed();
                 } catch (NoSuchElementException | StaleElementReferenceException e) {
                     return true;
                 }
@@ -37,6 +36,7 @@ public abstract class Page {
             System.out.println("No cookies accept button!");
         }
     }
+
 
     protected static<T> T initialize(WebDriver driver, String checkXpath, Class<T> clazz) {
     Wait<WebDriver> wait = new WebDriverWait(driver, 1).ignoring(StaleElementReferenceException.class);

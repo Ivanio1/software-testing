@@ -14,6 +14,9 @@ public class HomePage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]")
     public WebElement signInButton;
 
+
+    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
+    public WebElement profileDiv;
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }

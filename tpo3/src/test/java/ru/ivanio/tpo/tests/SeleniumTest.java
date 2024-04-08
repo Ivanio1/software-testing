@@ -18,8 +18,8 @@ public class SeleniumTest extends PageTestBase {
 
     @Override
     protected void preparePages(WebDriver driver) {
-        homePage = new HomePage(driver);
-        //homePage = HomePage.initialize(driver);
-        //homePage.acceptCookies();
+        //homePage = new HomePage(driver);
+        homePage = HomePage.initialize(driver);
+        homePage.acceptCookies();
     }
 }
