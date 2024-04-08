@@ -14,21 +14,13 @@ public abstract class Page {
 
   protected WebDriver driver;
 
-  /*
-   * Constructor injecting the WebDriver interface
-   * 
-   * @param webDriver
-   */
+
   public Page(WebDriver driver) {
     this.driver = driver;
   }
 
     @FindBy(how = How.XPATH, using = "//button[@data-qa=\"cookies-policy-informer-accept\"]")
     public WebElement cookiesAccept;
-
-
-    @FindBy(how = How.XPATH, using = "//button[@data-qa=\"region-clarification-confirm\"]")
-    public WebElement regionAccept;
 
 
     public void acceptCookies() {
@@ -45,23 +37,6 @@ public abstract class Page {
             System.out.println("No cookies accept button!");
         }
     }
-
-    public void acceptRegion() {
-        try {
-            regionAccept.click();
-            new WebDriverWait(driver, 1).until(d -> {
-                try {
-                    return !regionAccept.isDisplayed();
-                } catch (NoSuchElementException | StaleElementReferenceException e) {
-                    return true;
-                }
-            });
-        } catch (NoSuchElementException e) {
-            System.out.println("No region accept button!");
-        }
-    }
-
-
 
     protected static<T> T initialize(WebDriver driver, String checkXpath, Class<T> clazz) {
     Wait<WebDriver> wait = new WebDriverWait(driver, 1).ignoring(StaleElementReferenceException.class);

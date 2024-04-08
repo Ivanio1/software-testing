@@ -44,13 +44,13 @@ public abstract class PageTestBase {
 
   @BeforeEach
   public void prepareContext(WebDriver driver) {
+
     driver.manage().window().maximize();
     driver.get(baseUrl);
-    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     preparePages(driver);
   }
   protected abstract void preparePages(WebDriver driver);
-
 
 
   @AfterEach

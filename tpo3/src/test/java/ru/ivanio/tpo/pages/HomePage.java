@@ -11,18 +11,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Sample page
  */
 public class HomePage extends Page {
-    @FindBy(how = How.XPATH, using = "//*[@data-qa=\"login\"]")
-    public WebElement signInLink;
+    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]")
+    public WebElement signInButton;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public static HomePage initialize(WebDriver driver) {
-        return Page.initialize(driver, "//*[@data-qa=\"login\"]", HomePage.class);
+        return Page.initialize(driver, "//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]", HomePage.class);
     }
 
     public void goToSignIn() {
-        signInLink.click();
+        signInButton.click();
     }
 }

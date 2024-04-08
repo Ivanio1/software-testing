@@ -32,8 +32,6 @@ public class SignInPageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void correctUserEmail(WebDriver driver) {
         signInPage.tryLogin(Constants.EXISTING_EMAIL);
-
-
         //assertEquals("Пожалуйста, укажите email или телефон");
 
     }
@@ -42,8 +40,7 @@ public class SignInPageTest extends PageTestBase {
     @Override
     protected void preparePages(WebDriver driver) {
         HomePage homePage = HomePage.initialize(driver);
-        homePage.acceptCookies();
-        homePage.acceptRegion();
+        //homePage.acceptCookies();
         homePage.goToSignIn();
         signInPage = SignInPage.initialize(driver);
     }

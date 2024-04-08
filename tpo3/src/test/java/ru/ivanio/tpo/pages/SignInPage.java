@@ -6,12 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class SignInPage extends Page {
-    @FindBy(how = How.XPATH, using = "//*[@data-qa=\"account-signup-email\"]")
+    @FindBy(how = How.XPATH, using = "//input[@name=\"login\"]")
     public WebElement emailField;
 
-    @FindBy(how = How.XPATH, using = "//*[@data-qa=\"account-signup-submit\"]")
+    @FindBy(how = How.XPATH, using = "//*[@class=\"auth-main-step__form-button r-btn r-btn_full-width r-btn_large primary\"]")
     public WebElement submitButton;
-    @FindBy(how = How.XPATH, using = "//*[@data-qa=\"field-error-login field-error-login_BAD_LOGIN\"]")
+    @FindBy(how = How.XPATH, using = "//*[@class=\"auth-main-step__error auth-main-step__error_show\"]")
     public WebElement alert;
 
     public SignInPage(WebDriver webDriver) {
@@ -19,7 +19,7 @@ public class SignInPage extends Page {
     }
 
     public static SignInPage initialize(WebDriver driver) {
-        return Page.initialize(driver, "//*[@data-qa=\"account-signup-submit\"]", SignInPage.class);
+        return Page.initialize(driver, "//*[@class=\"auth-main-step__form-button r-btn r-btn_full-width r-btn_large primary\"]", SignInPage.class);
     }
 
     public void tryLogin(String email) {
