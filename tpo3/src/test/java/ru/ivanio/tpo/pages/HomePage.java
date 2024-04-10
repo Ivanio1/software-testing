@@ -15,7 +15,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]")
     public WebElement signInButton;
-
+    @FindBy(how = How.XPATH, using = "//*[@class=\"r-btn r-btn_large grey-lighter\"]")
+    public WebElement registerButton;
 
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
     public WebElement profileDiv;
@@ -29,6 +30,12 @@ public class HomePage extends Page {
 
     public void goToSignIn() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void goToRegister() {
+        WebElement element = driver.findElement(By.xpath("//*[@class=\"r-btn r-btn_large grey-lighter\"]"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
