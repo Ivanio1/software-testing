@@ -52,5 +52,4 @@ public class SignInPage extends Page {
         executor.executeScript("arguments[0].click();", element);
     }
 
-
 }

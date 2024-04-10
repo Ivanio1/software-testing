@@ -38,4 +38,11 @@ public class HomePage extends Page {
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
+
+
+    public void goToGeolocation() {
+        WebElement element = driver.findElement(By.xpath("//*[@class=\"r-region-select__activator r-btn r-btn_flat r-btn_large\"]"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
 }
