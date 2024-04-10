@@ -33,7 +33,6 @@ public class HomePage extends Page {
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
-
     public void goToRegister() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"r-btn r-btn_large grey-lighter\"]"));
         JavascriptExecutor executor = (JavascriptExecutor)driver;

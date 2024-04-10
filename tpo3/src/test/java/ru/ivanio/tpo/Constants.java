@@ -3,6 +3,7 @@ package ru.ivanio.tpo;
 public class Constants {
     public static final String WRONG_EMAIL = "aaa";
     public static final String EXISTING_EMAIL = "sobolev1van@yandex.ru";
+    public static final String EXISTING_EMAIL1 = "proverochanya@bk.com";
     public static final String EXISTING_PASSWORD = "@}y>G6Zdk:JytJB";
     public static final String NON_EXISTING_PASSWORD = "@}y>G6tJB";
     public static final String EMPTY_FIELD = "";

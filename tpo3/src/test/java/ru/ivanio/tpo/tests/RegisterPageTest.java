@@ -21,6 +21,7 @@ public class RegisterPageTest extends PageTestBase {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         assertEquals("Обязательное поле", registerPage.alert.getText().trim());
     }
+
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void nonCorrectName(WebDriver driver) {
@@ -48,8 +49,7 @@ public class RegisterPageTest extends PageTestBase {
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void existingEmail(WebDriver driver) {
-        registerPage.tryRegister(Constants.EXISTING_EMAIL, Constants.CORRECT_NAME, Constants.CORRECT_YEAR, Constants.CORRECT_WORK);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        registerPage.tryRegister(Constants.EXISTING_EMAIL1, Constants.CORRECT_NAME, Constants.CORRECT_YEAR, Constants.CORRECT_WORK);
         AlreadyExistsUserPage alreadyExistsUserPage = AlreadyExistsUserPage.initialize(driver);
         assertEquals("Пользователь с таким email уже существует", alreadyExistsUserPage.alert.getText().trim());
     }
