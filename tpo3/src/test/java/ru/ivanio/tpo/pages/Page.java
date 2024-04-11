@@ -39,7 +39,7 @@ public abstract class Page {
 
 
     protected static<T> T initialize(WebDriver driver, String checkXpath, Class<T> clazz) {
-    Wait<WebDriver> wait = new WebDriverWait(driver, 1).ignoring(StaleElementReferenceException.class);
+    Wait<WebDriver> wait = new WebDriverWait(driver, 50).ignoring(StaleElementReferenceException.class);
         wait.until(d -> {
             return d.findElement(By.xpath(checkXpath)).isDisplayed();
         });
