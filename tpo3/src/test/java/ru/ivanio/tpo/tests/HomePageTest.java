@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomePageTest extends PageTestBase {
     HomePage homePage;
+
     @Override
     protected void preparePages(WebDriver driver) {
         homePage = HomePage.initialize(driver);
@@ -21,7 +22,8 @@ public class HomePageTest extends PageTestBase {
     public void testNotFoundText(WebDriver driver) {
         homePage.findVacancy("qweasdzxc");
         new WebDriverWait(driver, 10).until(d -> homePage.notFoundErrorText.isDisplayed());
-        assertEquals(homePage.notFoundErrorText.getText(), "К сожалению, мы не нашли вакансий по вашему запросу. Что можно сделать?");
+        assertEquals(homePage.notFoundErrorText.getText(), "К сожалению, мы не нашли вакансий по вашему запросу. Что " +
+                "можно сделать?");
     }
 
     @ParameterizedTest(name = "{0}")
@@ -30,17 +32,19 @@ public class HomePageTest extends PageTestBase {
         homePage.radiusButton.click();
         new WebDriverWait(driver, 10).until(d -> homePage.notSelectedTextHolder.isDisplayed() &&
                 homePage.selectMetroStationText.isDisplayed());
-        assertEquals(homePage.selectMetroStationText.getText(), "Выберите станции метро, рядом с которыми хотите найти работу");
+        assertEquals(homePage.selectMetroStationText.getText(), "Выберите станции метро, рядом с которыми хотите " +
+                "найти работу");
         assertEquals(homePage.notSelectedTextHolder.getText(), "Пока вы не выбрали ни одной станции");
 
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
-    public void testFiltersCount(WebDriver driver) {
-        homePage.filterVacanciesForInvalids();
-        new WebDriverWait(driver, 10).until(d -> homePage.filtersCount.isDisplayed() );
-        assertEquals(homePage.filtersCount.getText(), "1");
+    public void testAutoComplete(WebDriver driver) {
+        homePage.enterVacancy("Свежие");
+        new WebDriverWait(driver, 10).until(d -> homePage.firstSuggestedVariantText.isDisplayed());
+        assertEquals(homePage.firstSuggestedVariantText.getText(),
+                "Свежие вакансии");
     }
 
 
