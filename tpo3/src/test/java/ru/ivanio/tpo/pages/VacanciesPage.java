@@ -32,6 +32,9 @@ public class VacanciesPage extends Page {
     @FindBy(how = How.XPATH, using = "//button[contains(.,'Применить')]")
     public WebElement acceptSortingsButton;
 
+    @FindBy(how = How.XPATH, using = "//*[@class=\"search-crumbs-desktop__reset-btn r-btn r-btn_medium\"]")
+    public WebElement clearFilters;
+
     public static VacanciesPage initialize(WebDriver driver) {
         return Page.initialize(driver, "//a[contains(.,'Вакансии')]", VacanciesPage.class);
     }
@@ -47,6 +50,11 @@ public class VacanciesPage extends Page {
         click(driver.findElement(By.xpath("(//*[@class=\"list__tile__sub-title desktop-sort__sub-title\"])[2]")));
         click(acceptSortingsButton);
     }
+
+    public void clearFilters() {
+        click(clearFilters);
+    }
+
 
     private void click(WebElement webElement) {
         JavascriptExecutor executor = (JavascriptExecutor)driver;

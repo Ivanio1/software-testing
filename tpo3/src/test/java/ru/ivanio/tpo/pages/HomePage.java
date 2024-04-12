@@ -30,20 +30,22 @@ public class HomePage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"metro-select-placeholder__content\"]/p")
     public WebElement notSelectedTextHolder;
 
-//    @FindBy(how = How.XPATH, using = "//input[@placeholder='Должность или ключевые слова']")
-//    public WebElement findVacanciesInput;
-
     @FindBy(how = How.XPATH, using = "//*[@class=\"list__tile__sub-title r-suggester-sub-title-mark\"]")
     public WebElement firstSuggestedVariantText;
     @FindBy(how = How.XPATH, using = "//*[@class=\"list__tile__sub-title r-suggester-sub-title-mark\"]/mark")
     public WebElement firstSuggestedVariantMark;
-//*[@class="list__tile__sub-title r-suggester-sub-title-mark"]
-
-//
-//    @FindBy(how = How.XPATH, using = "//li[2]/a")
-//    public WebElement enteredVacancyName;
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
     public WebElement profileDiv;
+
+    @FindBy(how = How.XPATH, using = "//*[@class=\"vacancy-search-form__filters r-btn r-btn_link r-btn_medium\"]")
+    public WebElement filters;
+    @FindBy(how = How.XPATH, using = "//label[contains(.,'Для людей с инвалидностью')]")
+    public WebElement invalidFilter;
+    @FindBy(how = How.XPATH, using = "//*[@class=\"layout desktop-filter-main__controls\"]/div/*[@class=\"r-btn r-btn_large primary\"]")
+    public WebElement filterSubmit;
+
+
+
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -64,6 +66,11 @@ public class HomePage extends Page {
         findVacanciesInput.click();
     }
 
+    public void filterForInvalids() {
+        filters.click();
+        invalidFilter.click();
+        filterSubmit.click();
+    }
 
     public void goToSignIn() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]"));
