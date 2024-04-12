@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,7 +14,7 @@ import ru.ivanio.tpo.pages.GeolocationPage;
 import ru.ivanio.tpo.pages.HomePage;
 import ru.ivanio.tpo.pages.SignInPage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
 
 public class LocationTest extends PageTestBase {
     GeolocationPage geolocationPage;

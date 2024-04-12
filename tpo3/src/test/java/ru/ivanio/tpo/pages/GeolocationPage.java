@@ -11,9 +11,6 @@ public class GeolocationPage extends Page {
     @FindBy(how = How.XPATH, using = "//button[@class=\"r-btn r-btn_medium primary\"]")
     public WebElement allCitiesButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@class=\"overlay overlay_active\"]")
-    public WebElement abakan;
-
 
     public static GeolocationPage initialize(WebDriver driver) {
         return Page.initialize(driver, "//*[@class=\"r-region-select__activator r-btn r-btn_flat r-btn_large\"]", GeolocationPage.class);
