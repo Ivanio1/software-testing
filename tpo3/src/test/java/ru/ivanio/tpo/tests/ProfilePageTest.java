@@ -30,7 +30,7 @@ public class ProfilePageTest extends PageTestBase {
         HomePage homePage1 = PageFactory.initElements(driver, HomePage.class);
         homePage1.openProfileMenu();
         HomePage.ProfileMenuPage.initialize(driver);
-        homePage1.goToProfile();
+       homePage1.goToProfile();
         profilePage = ProfilePage.initialize(driver);
     }
 
