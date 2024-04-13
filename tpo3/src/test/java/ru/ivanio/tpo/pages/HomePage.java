@@ -34,8 +34,6 @@ public class HomePage extends Page {
     public WebElement firstSuggestedVariantText;
     @FindBy(how = How.XPATH, using = "//*[@class=\"list__tile__sub-title r-suggester-sub-title-mark\"]/mark")
     public WebElement firstSuggestedVariantMark;
-    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
-    public WebElement profileDiv;
 
     @FindBy(how = How.XPATH, using = "//*[@class=\"vacancy-search-form__filters r-btn r-btn_link r-btn_medium\"]")
     public WebElement filters;
@@ -43,7 +41,14 @@ public class HomePage extends Page {
     public WebElement invalidFilter;
     @FindBy(how = How.XPATH, using = "//*[@class=\"layout desktop-filter-main__controls\"]/div/*[@class=\"r-btn r-btn_large primary\"]")
     public WebElement filterSubmit;
+    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[13]/div[2]/div[2]/div[6]/header/div[1]/div[3]/div[3]/div/div/div/div/div/div/div")
+    public WebElement profileButton;
 
+    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
+    public WebElement profileDiv;
+
+    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]")
+    public WebElement goToProfileButton;
 
 
     public HomePage(WebDriver webDriver) {
@@ -74,24 +79,49 @@ public class HomePage extends Page {
 
     public void goToSignIn() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"user-profile-header__sign-in r-btn r-btn_flat r-btn_large\"]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
+
     public void goToRegister() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"r-btn r-btn_large grey-lighter\"]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
 
     public void goToVacancies() {
         WebElement element = driver.findElement(By.xpath("//a[contains(.,'Вакансии')]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
 
     public void goToGeolocation() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"r-region-select__activator r-btn r-btn_flat r-btn_large\"]"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+    }
+
+    public void openProfileMenu() {
+        driver.findElement(By.cssSelector(".user-profile-menu__user-no-avatar")).click();
+    }
+
+    public void goToProfile() {
+        goToProfileButton.click();
+    }
+
+    public static class ProfileMenuPage extends Page {
+
+        @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]")
+        public WebElement goToProfileButton;
+
+        public ProfileMenuPage(WebDriver driver) {
+            super(driver);
+        }
+
+        public static HomePage initialize(WebDriver driver) {
+            return Page.initialize(driver, "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]", HomePage.class);
+        }
+
+
     }
 }

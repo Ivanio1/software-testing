@@ -1,5 +1,7 @@
 package ru.ivanio.tpo.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,6 +63,12 @@ public class ProfilePage extends Page {
         newPasswordField.sendKeys(newPassword);
         passwordApproveField.click();
         passwordApproveField.sendKeys(newPassword);
+    }
+
+    public void clickSavePasswordButton(){
+        WebElement element = driver.findElement(By.xpath("//div[@id=\'app\']/div[13]/div[2]/div[2]/div[6]/div/div/div/div[2]/div[2]/div[2]/div[5]/div/div/div[4]/div[2]/button"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public static class AddDiplomaPage extends Page {
