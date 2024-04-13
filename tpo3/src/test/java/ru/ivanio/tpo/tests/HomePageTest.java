@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
+import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -68,14 +69,10 @@ public class HomePageTest extends PageTestBase {
         signInPage.sendPassword(Constants.EXISTING_PASSWORD);
         HomePage homePage1 = PageFactory.initElements(driver, HomePage.class);
         homePage1.openProfileMenu();
-        var menu = HomePage.ProfileMenuPage.initialize(driver);
-        new WebDriverWait(driver, 50).until(i -> menu.uploadResumeButtonTitle.isDisplayed());
-        menu.uploadResumeButton.click();
-        assertEquals(menu.uploadResumeButtonTitle.getText(), "");
-        //homePage
+        new WebDriverWait(driver, 50).until(i -> homePage1.uploadResumeButton.isDisplayed());
+        homePage1.uploadResumeButton.click();
+        new WebDriverWait(driver, 50).until(i -> homePage1.uploadResumeButtonTitle.isDisplayed());
+        assertEquals(homePage1.uploadResumeButtonTitle.getText(), "Есть готовое резюме? Просто загрузите его!");
     }
-
-
-
 
 }

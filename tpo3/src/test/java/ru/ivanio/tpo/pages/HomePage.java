@@ -49,6 +49,11 @@ public class HomePage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__header\"]/a")
     public WebElement goToProfileButton;
 
+    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__upload-resume\"]/div/button")
+    public WebElement uploadResumeButton;
+    @FindBy(how = How.XPATH, using = "//*[@class=\"resume-dragndrop-dialog__title\"]")
+    public WebElement uploadResumeButtonTitle;
+
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -125,24 +130,4 @@ public class HomePage extends Page {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public static class ProfileMenuPage extends Page {
-
-        @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
-        public WebElement goToProfileButton;
-
-        @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__upload-resume\"]")
-        public WebElement uploadResumeButton;
-        @FindBy(how = How.XPATH, using = "//*[@class=\"resume-dragndrop-dialog__title\"]")
-        public WebElement uploadResumeButtonTitle;
-//resume-dragndrop-dialog__title
-        public ProfileMenuPage(WebDriver driver) {
-            super(driver);
-        }
-
-        public static ProfileMenuPage initialize(WebDriver driver) {
-            return Page.initialize(driver, "//*[@class=\"resume-dragndrop-dialog__title\"]", ProfileMenuPage.class);
-        }
-
-
-    }
 }
