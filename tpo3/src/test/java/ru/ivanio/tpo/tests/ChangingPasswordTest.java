@@ -20,6 +20,9 @@ import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ChangingPasswordTest extends PageTestBase {
     private ProfilePage profilePage;
     private String oldPassword = "";
@@ -47,9 +50,9 @@ public class ChangingPasswordTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void testPasswordChange(WebDriver driver) {
         Random random = new Random();
-        int num = random.nextInt(10);
+        int num = random.nextInt(1000);
 
-        String newPassword = oldPassword.substring(0, oldPassword.length()-1) + num;
+        String newPassword = oldPassword.substring(0, oldPassword.length()-3) + num;
 
         try(PrintWriter writer = new PrintWriter("src/test/resources/passwd")) {
             writer.write(newPassword);
@@ -57,11 +60,12 @@ public class ChangingPasswordTest extends PageTestBase {
             throw new RuntimeException(e);
         }
 
-
-        System.out.println(newPassword);
-
         profilePage.tryChangePassword(oldPassword, newPassword);
         profilePage.savePasswordButton.click();
+        new WebDriverWait(driver, 10).until(d -> profilePage.alertAfterUpdate.isDisplayed());
+        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Пароль успешно изменён!");
+
+
     }
 }
 

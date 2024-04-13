@@ -93,6 +93,12 @@ public class ProfilePage extends Page {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    public void goToHomePage() {
+        WebElement element = driver.findElement(By.xpath("//*[@class=\"page-header__item hidden-md-and-down\"]/a"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
     public static class AddEducationPage extends Page {
         @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[14]/div[2]/div[2]/div[6]/div[1]/div/div/div[3]/div[2]/div/div[3]/div/button[1]")
         public WebElement saveUserInfoButton;
