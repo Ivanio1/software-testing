@@ -68,9 +68,11 @@ public class HomePageTest extends PageTestBase {
         signInPage.sendPassword(Constants.EXISTING_PASSWORD);
         HomePage homePage1 = PageFactory.initElements(driver, HomePage.class);
         homePage1.openProfileMenu();
-        HomePage.ProfileMenuPage.initialize(driver);
+        var menu = HomePage.ProfileMenuPage.initialize(driver);
+        new WebDriverWait(driver, 50).until(i -> menu.uploadResumeButtonTitle.isDisplayed());
+        menu.uploadResumeButton.click();
+        assertEquals(menu.uploadResumeButtonTitle.getText(), "");
         //homePage
-        new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
     }
 
 
