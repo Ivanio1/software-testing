@@ -77,14 +77,15 @@ public class ProfilePageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void testChangingSurnameWithNewSurname(WebDriver driver) {
         profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
-
+        profilePage.saveNewSurnameButton.click();
+        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void testChangingSurnameWithOldSurname(WebDriver driver) {
         profilePage.surnameField.sendKeys(Constants.OLD_SURNAME);
-
+        profilePage.saveNewSurnameButton.click();
     }
 
     @ParameterizedTest(name = "{0}")
