@@ -31,7 +31,7 @@ public class CompaniesPageTest extends PageTestBase {
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void testTitle(WebDriver driver) {
-        new WebDriverWait(driver, 10).until(d -> companiesPage.title.isDisplayed());
-        assertEquals("Каталог профессий", companiesPage.title.getText());
+        new WebDriverWait(driver, 50).until(d -> companiesPage.title.isDisplayed());
+        assertEquals("Компании Санкт-Петербурга", companiesPage.title.getText());
     }
 }

@@ -15,8 +15,9 @@ public class CompaniesPage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"company-card\"][1]/div/h3")
     public WebElement firstSuggestionField;
 
-    @FindBy(how = How.XPATH, using = "//*[@class=career-search-header__title]")
+    @FindBy(how = How.XPATH, using = "//*[@class=\"companies-page__title\"]")
     public WebElement title;
+
 
     public CompaniesPage(WebDriver driver) {
         super(driver);

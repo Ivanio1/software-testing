@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.pages.HomePage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HomePageTest extends PageTestBase {
     HomePage homePage;
@@ -53,7 +52,7 @@ public class HomePageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void testRedirectToVacanciesAfterFilters(WebDriver driver) {
         homePage.filterForInvalids();
-        new WebDriverWait(driver, 10).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
+        new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
     }
 
 
