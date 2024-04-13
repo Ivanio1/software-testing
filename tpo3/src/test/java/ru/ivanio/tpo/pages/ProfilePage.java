@@ -55,6 +55,8 @@ public class ProfilePage extends Page {
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"last_name\"]")
     public WebElement surnameField;
+    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[13]/div[2]/div[2]/div[6]/div[1]/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/div[1]/button")
+    public WebElement surnameFieldDelete;
 
     @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[13]/div[2]/div[2]/div[6]/div[1]/div/div/div[2]/div[1]/div[2]/div[13]/div/button[1]")
     public WebElement saveNewSurnameButton;
