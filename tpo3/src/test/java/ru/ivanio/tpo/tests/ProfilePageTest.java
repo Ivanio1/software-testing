@@ -117,8 +117,8 @@ public class ProfilePageTest extends PageTestBase {
         assertEquals(profilePage.specialization.getText().trim(), "ИВТ");
         profilePage.editEducationButton.click();
         ProfilePage.AddEducationPage addEducationPage1 = ProfilePage.AddEducationPage.initialize(driver);
-        new WebDriverWait(driver, 10).until(d -> addEducationPage.deleteButton.isDisplayed());
-        addEducationPage.deleteButton.click();
+        new WebDriverWait(driver, 10).until(d -> addEducationPage1.deleteButton.isDisplayed());
+        addEducationPage1.deleteButton.click();
     }
 
 
