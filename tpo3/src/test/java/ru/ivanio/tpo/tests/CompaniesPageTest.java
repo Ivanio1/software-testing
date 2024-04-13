@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.pages.CompaniesPage;
 import ru.ivanio.tpo.pages.HomePage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CompaniesPageTest extends PageTestBase {
@@ -25,5 +26,12 @@ public class CompaniesPageTest extends PageTestBase {
         companiesPage.enterCompanyName("Сбербанк");
         new WebDriverWait(driver, 10).until(d -> companiesPage.firstSuggestionField.isDisplayed());
         assertTrue(companiesPage.firstSuggestionField.getText().toLowerCase().contains("сбер"));
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testTitle(WebDriver driver) {
+        new WebDriverWait(driver, 10).until(d -> companiesPage.title.isDisplayed());
+        assertEquals("Каталог профессий", companiesPage.title.getText());
     }
 }
