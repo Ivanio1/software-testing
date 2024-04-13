@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
-import ru.ivanio.tpo.pages.ProfileMenuPage;
 import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
 import java.util.concurrent.TimeUnit;
@@ -52,18 +51,6 @@ public class ProfilePageTest extends PageTestBase {
         Assert.assertEquals(profilePage.alertOldPassword.getText().trim(), "Текущий пароль не верен");
     }
 
-//    @ParameterizedTest(name = "{0}")
-//    @MethodSource("allDrivers")
-//    public void testPasswordChange(WebDriver driver) {
-//        Random random = new Random();
-//        int num= random.nextInt(10);
-//        String newPassword = Constants.EXISTING_PASSWORD.substring(1, Constants.EXISTING_PASSWORD.length() - 1)+ num;
-//        profilePage.tryChangePassword(Constants.EXISTING_PASSWORD, newPassword);
-//        profilePage.savePasswordButton.click();
-//        new WebDriverWait(driver, 10).until(d -> profilePage.alertOldPassword.isDisplayed());
-//        Constants.EXISTING_PASSWORD = newPassword;
-//    }
-
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void testCheckboxes(WebDriver driver) {
@@ -72,13 +59,13 @@ public class ProfilePageTest extends PageTestBase {
     }
 
 
-//    @ParameterizedTest(name = "{0}")
-//    @MethodSource("allDrivers")
-//    public void testChangingSurnameWithNewSurname(WebDriver driver) {
-//        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
-//        profilePage.saveNewSurnameButton.click();
-//        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
-//    }
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testChangingSurnameWithNewSurname(WebDriver driver) {
+        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
+        profilePage.saveNewSurnameButton.click();
+        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
+    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
