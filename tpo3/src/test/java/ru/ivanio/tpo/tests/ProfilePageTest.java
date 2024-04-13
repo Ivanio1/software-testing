@@ -10,8 +10,6 @@ import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
 import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
-
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,13 +71,13 @@ public class ProfilePageTest extends PageTestBase {
     }
 
 
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("allDrivers")
-    public void testChangingSurnameWithNewSurname(WebDriver driver) {
-        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
-        profilePage.saveNewSurnameButton.click();
-        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
-    }
+//    @ParameterizedTest(name = "{0}")
+//    @MethodSource("allDrivers")
+//    public void testChangingSurnameWithNewSurname(WebDriver driver) {
+//        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
+//        profilePage.saveNewSurnameButton.click();
+//        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
+//    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")

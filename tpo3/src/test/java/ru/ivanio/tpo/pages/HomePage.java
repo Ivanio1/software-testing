@@ -46,7 +46,7 @@ public class HomePage extends Page {
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
     public WebElement profileDiv;
 
-    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]")
+    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
     public WebElement goToProfileButton;
 
 
@@ -126,15 +126,19 @@ public class HomePage extends Page {
 
     public static class ProfileMenuPage extends Page {
 
-        @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]")
+        @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
         public WebElement goToProfileButton;
+
+        @FindBy(how = How.XPATH, using = "//button[@aria-label='Загрузить резюме']")
+        public WebElement uploadResume;
+
 
         public ProfileMenuPage(WebDriver driver) {
             super(driver);
         }
 
-        public static HomePage initialize(WebDriver driver) {
-            return Page.initialize(driver, "/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]", HomePage.class);
+        public static ProfileMenuPage initialize(WebDriver driver) {
+            return Page.initialize(driver, "/html/body/div[1]/div[2]/div/div[8]/div/ul/li[3]/div/button", ProfileMenuPage.class);
         }
 
 

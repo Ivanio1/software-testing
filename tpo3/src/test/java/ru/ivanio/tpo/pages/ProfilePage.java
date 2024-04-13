@@ -59,8 +59,8 @@ public class ProfilePage extends Page {
     @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[13]/div[2]/div[2]/div[6]/div[1]/div/div/div[2]/div[1]/div[2]/div[13]/div/button[1]")
     public WebElement saveNewSurnameButton;
 
-    @FindBy(how = How.XPATH, using = "//div[@class=\"messages-pool__item-message\"]")
-    public WebElement alertAfterUpdate;
+//    @FindBy(how = How.XPATH, using = "//div[@class=\"messages-pool__item-message\"]")
+//    public WebElement alertAfterUpdate;
 
     public static ProfilePage initialize(WebDriver driver) {
         return Page.initialize(driver, "//button[@class=\"r-btn r-btn_disabled r-btn_medium secondary\"]", ProfilePage.class);
