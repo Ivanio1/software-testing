@@ -3,8 +3,11 @@ package ru.ivanio.tpo.tests;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
+import ru.ivanio.tpo.pages.SignInPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,6 +57,22 @@ public class HomePageTest extends PageTestBase {
         homePage.filterForInvalids();
         new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
     }
+
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testUploadResume(WebDriver driver) {
+        homePage.goToSignIn();
+        SignInPage signInPage = SignInPage.initialize(driver);
+        signInPage.tryLogin(Constants.EXISTING_EMAIL);
+        signInPage.sendPassword(Constants.EXISTING_PASSWORD);
+        HomePage homePage1 = PageFactory.initElements(driver, HomePage.class);
+        homePage1.openProfileMenu();
+        HomePage.ProfileMenuPage.initialize(driver);
+        //homePage
+        new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
+    }
+
 
 
 

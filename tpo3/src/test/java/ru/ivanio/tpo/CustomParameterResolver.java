@@ -19,8 +19,7 @@ public class CustomParameterResolver implements BeforeEachMethodAdapter, Paramet
     private ParameterResolver parameterisedTestParameterResolver = null;
 
     @Override
-    public void invokeBeforeEachMethod(ExtensionContext context, ExtensionRegistry registry)
-            throws Throwable {
+    public void invokeBeforeEachMethod(ExtensionContext context, ExtensionRegistry registry) {
         Optional<ParameterResolver> resolverOptional = registry.getExtensions(ParameterResolver.class)
                 .stream()
                 .filter(parameterResolver ->

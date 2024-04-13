@@ -22,7 +22,6 @@ public class LocationTest extends PageTestBase {
     protected void preparePages(WebDriver driver) {
         HomePage homePage = HomePage.initialize(driver);
         homePage.acceptCookies();
-
         homePage.goToSignIn();
         var signInPage = SignInPage.initialize(driver);
         signInPage.tryLogin(Constants.EXISTING_EMAIL);

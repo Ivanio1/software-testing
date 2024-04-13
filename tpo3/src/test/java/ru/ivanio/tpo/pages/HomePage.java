@@ -129,9 +129,8 @@ public class HomePage extends Page {
         @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
         public WebElement goToProfileButton;
 
-        @FindBy(how = How.XPATH, using = "//button[@aria-label='Загрузить резюме']")
-        public WebElement uploadResume;
-
+        @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__upload-resume\"]/div/button")
+        public WebElement uploadResumeButton;
 
         public ProfileMenuPage(WebDriver driver) {
             super(driver);
