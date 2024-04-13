@@ -3,6 +3,7 @@ package ru.ivanio.tpo.tests;
 import org.junit.Assert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -89,11 +90,35 @@ public class ProfilePageTest extends PageTestBase {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
-    public void testCheckAddingInformation(WebDriver driver) {
-        profilePage.addInfoAboutUser.click();
-        ProfilePage.AddDiplomaPage.initialize(driver);
+    public void testCheckAddingInformationWithEmpty(WebDriver driver) {
+        profilePage.openEducationChangePage();
+        ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
+        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.EMPTY_FIELD);
+        new WebDriverWait(driver, 10).until(d -> addEducationPage.yearAlert.isDisplayed());
+        assertEquals(addEducationPage.yearAlert.getText().trim(), "Укажите год окончания");
+    }
 
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testCheckAddingInformationWithNotCorrectField(WebDriver driver) {
+        profilePage.openEducationChangePage();
+        ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
+        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.UNCORRECT_YEAR);
+        new WebDriverWait(driver, 10).until(d -> addEducationPage.yearAlert.isDisplayed());
+        assertEquals(addEducationPage.yearAlert.getText().trim(), "Период указан неверно");
+    }
 
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testCheckAddingInformationWithCorrectField(WebDriver driver) {
+        profilePage.openEducationChangePage();
+        ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
+        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.CORRECT_YEAR);
+        assertEquals(profilePage.specialization.getText().trim(), "ИВТ");
+        profilePage.editEducationButton.click();
+        ProfilePage.AddEducationPage addEducationPage1 = ProfilePage.AddEducationPage.initialize(driver);
+        new WebDriverWait(driver, 10).until(d -> addEducationPage.deleteButton.isDisplayed());
+        addEducationPage.deleteButton.click();
     }
 
 

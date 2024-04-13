@@ -102,11 +102,15 @@ public class HomePage extends Page {
     }
 
     public void openProfileMenu() {
-        driver.findElement(By.cssSelector(".user-profile-menu__user-no-avatar")).click();
+        WebElement element = driver.findElement(By.cssSelector(".user-profile-menu__user-no-avatar"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public void goToProfile() {
-        goToProfileButton.click();
+        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[8]/div/ul/a[1]/li/a/div/div[2]"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public static class ProfileMenuPage extends Page {

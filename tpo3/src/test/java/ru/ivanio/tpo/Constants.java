@@ -15,8 +15,7 @@ public class Constants {
     public static final String CORRECT_YEAR = "2003";
     public static final String CORRECT_WORK = "Кассир";
     public static final String NEW_SURNAME = "Петров";
-    public static final String DIPLOMA_NAME = "LOL";
-    public static final String DIPLOMA_YEAR = "2015";
-    public static final String DIPLOMA_LINK = "https://lol.link.ru";
-
+    public static final String UNI_NAME = "ИТМО";
+    public static final String SPEC_NAME = "ИВТ";
+    public static final String UNCORRECT_YEAR = "20044";
 }
