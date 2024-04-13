@@ -11,6 +11,7 @@ import ru.ivanio.tpo.pages.HomePage;
 import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +53,17 @@ public class ProfilePageTest extends PageTestBase {
         Assert.assertEquals(profilePage.alertOldPassword.getText().trim(), "Текущий пароль не верен");
     }
 
-
+//    @ParameterizedTest(name = "{0}")
+//    @MethodSource("allDrivers")
+//    public void testPasswordChange(WebDriver driver) {
+//        Random random = new Random();
+//        int num= random.nextInt(10);
+//        String newPassword = Constants.EXISTING_PASSWORD.substring(1, Constants.EXISTING_PASSWORD.length() - 1)+ num;
+//        profilePage.tryChangePassword(Constants.EXISTING_PASSWORD, newPassword);
+//        profilePage.savePasswordButton.click();
+//        new WebDriverWait(driver, 10).until(d -> profilePage.alertOldPassword.isDisplayed());
+//        Constants.EXISTING_PASSWORD = newPassword;
+//    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
@@ -62,19 +73,19 @@ public class ProfilePageTest extends PageTestBase {
     }
 
 
-//    @ParameterizedTest(name = "{0}")
-//    @MethodSource("allDrivers")
-//    public void testChangingFields(WebDriver driver) {
-//        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
-//        assertFalse(profilePage.checkbox.isSelected());
-//    }
-//
-//    @ParameterizedTest(name = "{0}")
-//    @MethodSource("allDrivers")
-//    public void testChangingFields(WebDriver driver) {
-//        profilePage.surnameField.sendKeys(Constants.OLD_SURNAME);
-//        assertFalse(profilePage.checkbox.isSelected());
-//    }
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testChangingSurnameWithNewSurname(WebDriver driver) {
+        profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
+
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testChangingSurnameWithOldSurname(WebDriver driver) {
+        profilePage.surnameField.sendKeys(Constants.OLD_SURNAME);
+
+    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
@@ -91,7 +102,7 @@ public class ProfilePageTest extends PageTestBase {
     public void testCheckAddingInformationWithEmpty(WebDriver driver) {
         profilePage.openEducationChangePage();
         ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
-        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.EMPTY_FIELD);
+        addEducationPage.addEducation(Constants.UNI_NAME, Constants.SPEC_NAME, Constants.EMPTY_FIELD);
         new WebDriverWait(driver, 10).until(d -> addEducationPage.yearAlert.isDisplayed());
         assertEquals(addEducationPage.yearAlert.getText().trim(), "Укажите год окончания");
     }
@@ -101,7 +112,7 @@ public class ProfilePageTest extends PageTestBase {
     public void testCheckAddingInformationWithNotCorrectField(WebDriver driver) {
         profilePage.openEducationChangePage();
         ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
-        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.UNCORRECT_YEAR);
+        addEducationPage.addEducation(Constants.UNI_NAME, Constants.SPEC_NAME, Constants.UNCORRECT_YEAR);
         new WebDriverWait(driver, 10).until(d -> addEducationPage.yearAlert.isDisplayed());
         assertEquals(addEducationPage.yearAlert.getText().trim(), "Период указан неверно");
     }
@@ -111,7 +122,7 @@ public class ProfilePageTest extends PageTestBase {
     public void testCheckAddingInformationWithCorrectField(WebDriver driver) {
         profilePage.openEducationChangePage();
         ProfilePage.AddEducationPage addEducationPage = ProfilePage.AddEducationPage.initialize(driver);
-        addEducationPage.addEducation(Constants.UNI_NAME,Constants.SPEC_NAME,Constants.CORRECT_YEAR);
+        addEducationPage.addEducation(Constants.UNI_NAME, Constants.SPEC_NAME, Constants.CORRECT_YEAR);
         assertEquals(profilePage.specialization.getText().trim(), "ИВТ");
         profilePage.editEducationButton.click();
         ProfilePage.AddEducationPage addEducationPage1 = ProfilePage.AddEducationPage.initialize(driver);

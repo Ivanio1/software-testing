@@ -53,6 +53,9 @@ public class ProfilePage extends Page {
     @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[13]/div[2]/div[2]/div[6]/div[1]/div/div/div[2]/div[2]/div[2]/div[1]/div[3]/button")
     public WebElement editEducationButton;
 
+    @FindBy(how = How.XPATH, using = "//*[@id=\"last_name\"]")
+    public WebElement surnameField;
+
     public static ProfilePage initialize(WebDriver driver) {
         return Page.initialize(driver, "//button[@class=\"r-btn r-btn_disabled r-btn_medium secondary\"]", ProfilePage.class);
     }
