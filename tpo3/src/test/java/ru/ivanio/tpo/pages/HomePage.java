@@ -46,7 +46,6 @@ public class HomePage extends Page {
 
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
     public WebElement profileDiv;
-    //@FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[31]/div/ul/a[1]/li/a")
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__header\"]/a")
     public WebElement goToProfileButton;
 
