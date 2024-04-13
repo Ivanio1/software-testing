@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
+import ru.ivanio.tpo.pages.ProfileMenuPage;
 import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +29,8 @@ public class ProfilePageTest extends PageTestBase {
         signInPage.sendPassword(Constants.EXISTING_PASSWORD);
         HomePage homePage1 = PageFactory.initElements(driver, HomePage.class);
         homePage1.openProfileMenu();
-        HomePage.ProfileMenuPage.initialize(driver);
-        homePage1.goToProfile();
+        new WebDriverWait(driver, 10).until(d -> homePage1.goToProfileButton.isDisplayed());
+        homePage1.goToProfileButton.click();
         profilePage = ProfilePage.initialize(driver);
     }
 

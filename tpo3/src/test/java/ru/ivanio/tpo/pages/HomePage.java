@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 /**
@@ -45,8 +46,8 @@ public class HomePage extends Page {
 
     @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__user-no-avatar\"]")
     public WebElement profileDiv;
-
-    @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
+    //@FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[31]/div/ul/a[1]/li/a")
+    @FindBy(how = How.XPATH, using = "//*[@class=\"user-profile-menu__header\"]/a")
     public WebElement goToProfileButton;
 
 
@@ -82,18 +83,6 @@ public class HomePage extends Page {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void goToCompanies() {
-        WebElement element = driver.findElement(By.xpath("//a[contains(.,'Компании')]"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-    }
-
-    public void goToProfessions() {
-        WebElement element = driver.findElement(By.xpath("//a[contains(.,'Профессии')]"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-    }
-
     public void goToRegister() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"r-btn r-btn_large grey-lighter\"]"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -124,23 +113,4 @@ public class HomePage extends Page {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public static class ProfileMenuPage extends Page {
-
-        @FindBy(how = How.XPATH, using = "/html/body/div[1]/div[2]/div/div[28]/div/ul/a[1]/li/a/div/div[2]")
-        public WebElement goToProfileButton;
-
-        @FindBy(how = How.XPATH, using = "//button[@aria-label='Загрузить резюме']")
-        public WebElement uploadResume;
-
-
-        public ProfileMenuPage(WebDriver driver) {
-            super(driver);
-        }
-
-        public static ProfileMenuPage initialize(WebDriver driver) {
-            return Page.initialize(driver, "/html/body/div[1]/div[2]/div/div[8]/div/ul/li[3]/div/button", ProfileMenuPage.class);
-        }
-
-
-    }
 }
