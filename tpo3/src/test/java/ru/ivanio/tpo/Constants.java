@@ -21,6 +21,5 @@ public class Constants {
     public static final String UNCORRECT_YEAR = "20044";
 
     public static final String USER_FOR_CHANGING_PASSWORD = "egorkateev1992@gmail.com";
-    public static String USER_FOR_CHANGING_PASSWORD_PASSWORD = "loxloxlox123GG4";
 
 }
