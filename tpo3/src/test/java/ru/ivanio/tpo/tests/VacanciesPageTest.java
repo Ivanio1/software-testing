@@ -8,11 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.ivanio.tpo.pages.HomePage;
 import ru.ivanio.tpo.pages.VacanciesPage;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VacanciesPageTest extends PageTestBase {
     VacanciesPage vacanciesPage;
+
     @Override
     protected void preparePages(WebDriver driver) {
         var homePage = HomePage.initialize(driver);
@@ -25,7 +28,7 @@ public class VacanciesPageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void testFiltersCount(WebDriver driver) {
         vacanciesPage.filterVacanciesForInvalids();
-        new WebDriverWait(driver, 10).until(d -> vacanciesPage.filtersCount.isDisplayed() );
+        new WebDriverWait(driver, 10).until(d -> vacanciesPage.filtersCount.isDisplayed());
         assertEquals(vacanciesPage.filtersCount.getText(), "1");
     }
 
@@ -34,7 +37,7 @@ public class VacanciesPageTest extends PageTestBase {
     public void testSortsCount(WebDriver driver) {
         vacanciesPage.filterVacanciesForInvalids();
         vacanciesPage.sortByRadius();
-        new WebDriverWait(driver, 10).until(d -> vacanciesPage.sortingsCount.isDisplayed() );
+        new WebDriverWait(driver, 10).until(d -> vacanciesPage.sortingsCount.isDisplayed());
         assertEquals(vacanciesPage.sortingsCount.getText(), "1");
     }
 
@@ -45,5 +48,16 @@ public class VacanciesPageTest extends PageTestBase {
         vacanciesPage.sortByRadius();
         vacanciesPage.clearFilters();
         assertThrows(NotFoundException.class, vacanciesPage.sortingsCount::getText);
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testFilterBySalary(WebDriver driver) {
+        vacanciesPage.filterBySalary("100000");
+        new WebDriverWait(driver, 10).until(d -> vacanciesPage.firstSalaryField.isDisplayed());
+        var firstOfferMinSalary = Integer.parseInt(
+                vacanciesPage.firstSalaryField.getText().split("—")[0].replace(" ", "")
+        );
+        assertTrue(firstOfferMinSalary >= 100000);
     }
 }

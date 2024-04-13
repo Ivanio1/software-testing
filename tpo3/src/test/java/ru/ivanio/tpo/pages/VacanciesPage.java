@@ -2,6 +2,7 @@ package ru.ivanio.tpo.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +35,12 @@ public class VacanciesPage extends Page {
 
     @FindBy(how = How.XPATH, using = "//*[@class=\"search-crumbs-desktop__reset-btn r-btn r-btn_medium\"]")
     public WebElement clearFilters;
-
+    @FindBy(how = How.XPATH, using = "//button[@aria-label='Найти']")
+    public WebElement submitFilterButton;
+    @FindBy(how = How.XPATH, using = "//*[@class=\"vacancy-preview-card__salary\"]/a")
+    public WebElement firstSalaryField;
+    @FindBy(how = How.XPATH, using = "//input[@placeholder='Зарплата от, руб.']")
+    public WebElement salaryFilter;
     public static VacanciesPage initialize(WebDriver driver) {
         return Page.initialize(driver, "//a[contains(.,'Вакансии')]", VacanciesPage.class);
     }
@@ -55,6 +61,12 @@ public class VacanciesPage extends Page {
         click(clearFilters);
     }
 
+
+    public void filterBySalary(String salary) {
+        salaryFilter.sendKeys(salary);
+        salaryFilter.sendKeys(Keys.ENTER);
+        click(submitFilterButton);
+    }
 
     private void click(WebElement webElement) {
         JavascriptExecutor executor = (JavascriptExecutor)driver;
