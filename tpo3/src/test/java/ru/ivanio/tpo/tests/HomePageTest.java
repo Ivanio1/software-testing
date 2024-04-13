@@ -56,7 +56,7 @@ public class HomePageTest extends PageTestBase {
     @MethodSource("allDrivers")
     public void testRedirectToVacanciesAfterFilters(WebDriver driver) {
         homePage.filterForInvalids();
-        new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://www.rabota.ru/vacancy"));
+        new WebDriverWait(driver, 50).until(d -> d.getCurrentUrl().startsWith("https://spb.rabota.ru/vacancy"));
     }
 
 

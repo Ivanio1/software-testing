@@ -22,7 +22,7 @@ public class CompaniesPageTest extends PageTestBase {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
-    public void testFilterBySalary(WebDriver driver) {
+    public void testFilterByCompanyName(WebDriver driver) {
         companiesPage.enterCompanyName("Сбербанк");
         new WebDriverWait(driver, 10).until(d -> companiesPage.firstSuggestionField.isDisplayed());
         assertTrue(companiesPage.firstSuggestionField.getText().toLowerCase().contains("сбер"));

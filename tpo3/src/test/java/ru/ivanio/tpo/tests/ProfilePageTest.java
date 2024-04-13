@@ -38,7 +38,7 @@ public class ProfilePageTest extends PageTestBase {
     public void testPasswordChangeWrongInput(WebDriver driver) {
         profilePage.tryChangePassword(Constants.EXISTING_PASSWORD, Constants.WRONG_FORMAT_PASSWORD);
         profilePage.savePasswordButton.click();
-        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+        new WebDriverWait(driver, 10).until(d -> profilePage.alert.isDisplayed());
         Assert.assertEquals(profilePage.alert.getText().trim(), "Пароль должен быть не менее 6 символов, включать цифры, строчные и заглавные латинские буквы");
     }
 
@@ -83,8 +83,8 @@ public class ProfilePageTest extends PageTestBase {
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
     public void testChangingFieldsEmpty(WebDriver driver) {
-        profilePage.surnameButton.click();
-        profilePage.surnameUserInfoButton.click();
+        profilePage.click(profilePage.surnameButton);
+        profilePage.click(profilePage.surnameUserInfoButton);
         new WebDriverWait(driver, 10).until(d -> profilePage.surnameAlert.isDisplayed());
         assertEquals("Заполните поле", profilePage.surnameAlert.getText().trim());
     }

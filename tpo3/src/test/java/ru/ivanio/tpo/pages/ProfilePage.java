@@ -95,7 +95,7 @@ public class ProfilePage extends Page {
 
     public void goToHomePage() {
         WebElement element = driver.findElement(By.xpath("//*[@class=\"page-header__item hidden-md-and-down\"]/a"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
 
@@ -143,5 +143,9 @@ public class ProfilePage extends Page {
         }
     }
 
+    public void click(WebElement webElement) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", webElement);
+    }
 
 }

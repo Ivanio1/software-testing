@@ -25,14 +25,14 @@ public abstract class Page {
     public void acceptCookies() {
         try {
             acceptCookiesBtn.click();
-            new WebDriverWait(driver, 5).until(d -> {
+            new WebDriverWait(driver, 15).until(d -> {
                 try {
                     return !acceptCookiesBtn.isDisplayed();
-                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
                     return true;
                 }
             });
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
             System.out.println("No cookies accept button!");
         }
     }
