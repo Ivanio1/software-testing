@@ -3,7 +3,6 @@ package ru.ivanio.tpo.tests;
 import org.junit.Assert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,17 +43,16 @@ public class ProfilePageTest extends PageTestBase {
         Assert.assertEquals(profilePage.alert.getText().trim(), "Пароль должен быть не менее 6 символов, включать цифры, строчные и заглавные латинские буквы");
     }
 
-//    @ParameterizedTest(name = "{0}")
-//    @MethodSource("allDrivers")
-//    public void testPasswordChangeWithWrongOldPassword(WebDriver driver) {
-//        profilePage.tryChangePassword(Constants.WRONG_FORMAT_PASSWORD, Constants.EXISTING_PASSWORD);
-//        profilePage.savePasswordButton.click();
-//        new WebDriverWait(driver, 10).until(d -> profilePage.alertOldPassword.isDisplayed());
-//        Assert.assertEquals(profilePage.alertOldPassword.getText().trim(), "Текущий пароль не верен");
-//    }
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("allDrivers")
+    public void testPasswordChangeWithWrongOldPassword(WebDriver driver) {
+        profilePage.tryChangePassword(Constants.WRONG_FORMAT_PASSWORD, Constants.EXISTING_PASSWORD);
+        profilePage.savePasswordButton.click();
+        new WebDriverWait(driver, 10).until(d -> profilePage.alertOldPassword.isDisplayed());
+        Assert.assertEquals(profilePage.alertOldPassword.getText().trim(), "Текущий пароль не верен");
+    }
 
 
-    ///тест нормальной смены пароля, с изменением constants.Existing_psswd
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("allDrivers")
