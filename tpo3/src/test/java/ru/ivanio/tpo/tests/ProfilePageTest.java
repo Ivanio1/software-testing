@@ -10,9 +10,9 @@ import ru.ivanio.tpo.Constants;
 import ru.ivanio.tpo.pages.HomePage;
 import ru.ivanio.tpo.pages.ProfilePage;
 import ru.ivanio.tpo.pages.SignInPage;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 public class ProfilePageTest extends PageTestBase {
@@ -66,7 +66,7 @@ public class ProfilePageTest extends PageTestBase {
         profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
         profilePage.saveNewSurnameButton.click();
         new WebDriverWait(driver, 10).until(d -> profilePage.alertAfterUpdate.isDisplayed());
-        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
+        assertEquals(profilePage.alertAfterUpdate.getText().trim(), "Данные профиля успешно сохранены!");
     }
 
     @ParameterizedTest(name = "{0}")
@@ -76,7 +76,7 @@ public class ProfilePageTest extends PageTestBase {
         profilePage.surnameField.sendKeys(Constants.NEW_SURNAME);
         profilePage.saveNewSurnameButton.click();
         new WebDriverWait(driver, 10).until(d -> profilePage.alertAfterUpdate.isDisplayed());
-        assertEquals(profilePage.alertAfterUpdate.getText().trim(),"Данные профиля успешно сохранены!");
+        assertEquals(profilePage.alertAfterUpdate.getText().trim(), "Данные профиля успешно сохранены!");
 
     }
 
@@ -122,7 +122,6 @@ public class ProfilePageTest extends PageTestBase {
         new WebDriverWait(driver, 10).until(d -> addEducationPage1.deleteButton.isDisplayed());
         addEducationPage1.deleteButton.click();
     }
-
 
 
 }
